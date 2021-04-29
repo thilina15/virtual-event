@@ -1,0 +1,59 @@
+const mongoose = require('mongoose')
+const stall = new mongoose.Schema({
+    name:{
+        type:String,
+        required:true
+    },
+    description:{
+        type:String,
+        required:true
+    },
+    model:{
+        type:Number,
+        default:1
+    },
+    package:{
+        type:Number,
+        default:1
+    },
+    isSpecial:{
+        type:Boolean,
+        default:false
+    },
+    characterType:{
+        type:Number,
+        default:1
+    },
+    webSite:String,
+    nameImage:{
+        type:String,
+        required:true
+    },
+    logoImage:{
+        type:String,
+        required:true
+    },
+    poster1:{
+        type:String,
+        required:true   
+    },
+    poster2:String,
+    poster3:String,
+    poster4:String,
+    QRcode:String,
+    streamLink:String,
+    totalVisits:Number,
+    visitedEmails:[
+        {type:String}
+    ],
+    exhibitorID:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Exhibitor'
+    },
+    eventID:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Event'
+    }
+})
+
+module.exports = mongoose.model('Stall',stall)
