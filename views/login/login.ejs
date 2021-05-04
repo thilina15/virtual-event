@@ -1,0 +1,24 @@
+<% if (locals.adminLogin) { %>
+    <h1>login as system admin</h1>
+    <form action="/login/admin" method="POST">
+        name: <input type="text" name="userName">
+        passwword: <input type="password" name="password">
+        <button type="submit">LOGIN</button>
+    </form>    
+<% }else  {%> 
+    <h1>login as event admin</h1>
+    <form action="" method="POST">
+        name: <input type="text" name="userName">
+        passwword: <input type="password" name="password">
+        <button type="submit">LOGIN</button>
+    </form>
+
+    <br><hr>
+
+    <h1>login as exhibitor</h1>
+    <form action="" method="POST">
+        name: <input type="text" name="userName">
+        passwword: <input type="password" name="password">
+        <button type="submit">LOGIN</button>
+    </form>
+<% } %>  
