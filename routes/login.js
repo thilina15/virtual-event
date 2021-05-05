@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const event = require('../models/event')
 
 //event admins and exhibitors login
 router.get('/',(req,res)=>{

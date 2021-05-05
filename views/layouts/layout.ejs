@@ -8,6 +8,9 @@
 </head>
 <body>
     <h1><center><u>Virtual Event</u></center></h1>
+    <% if(locals.systemAdmin){ %> 
+        <%- include('../navBars/ownerNav') %>
+    <% } %>  
     <%- body %> 
 </body>
 </html>

@@ -1,1 +1,14 @@
 event admins are here
+<br>
+
+
+<% locals.eventAdmins.forEach(eventAdmin=>{%>
+    <div>
+        <%=eventAdmin.name%>
+        <a href="/event/new/<%=eventAdmin.id%>">add event</a>
+        <%=eventAdmin.id%>
+        <br> 
+    </div>
+<%}) %> 
+
+

@@ -1,14 +1,8 @@
 const mongoose = require('mongoose')
 
 const event = new mongoose.Schema({
-    name:{
-        type:String,
-        required:true
-    },
-    Description:{
-        type:String,
-        required:true
-    },
+    name:String,
+    Description:String,
     layout:{
         type:Number,
         default:1

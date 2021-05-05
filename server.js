@@ -15,6 +15,8 @@ const app = express()
 const homeRoute = require('./routes/home/home')
 const loginRoute = require('./routes/login')
 const dashBoard = require('./routes/dashBoard')
+const eventAdmin = require('./routes/eventadmin')
+const event = require('./routes/event')
 
 //app config
 app.set('view engine','ejs')
@@ -39,8 +41,17 @@ const db = mongoose.connection
 db.on('error', error => console.error(error))
 db.once('open', ()=> console.log('connected to mongoose')) 
 
+app.use((req,res,next)=>{
+    if(req.session.systemAdmin){
+        res.locals.systemAdmin=true
+    }
+    next()
+})
+
 app.use('/',homeRoute)
 app.use('/login',loginRoute)
 app.use('/dashboard',dashBoard)
+app.use('/eventadmin',eventAdmin)
+app.use('/event',event)
 
 app.listen(process.env.PORT||3000)
