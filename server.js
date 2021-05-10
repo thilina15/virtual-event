@@ -41,9 +41,10 @@ const db = mongoose.connection
 db.on('error', error => console.error(error))
 db.once('open', ()=> console.log('connected to mongoose')) 
 
+//setup the user
 app.use((req,res,next)=>{
-    if(req.session.systemAdmin){
-        res.locals.systemAdmin=true
+    if(req.session.userType){
+        res.locals.userType = req.session.userType
     }
     next()
 })

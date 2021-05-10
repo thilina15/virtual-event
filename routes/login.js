@@ -4,15 +4,15 @@ const eventAdmin = require('../models/eventAdmin')
 
 //event admins and exhibitors login
 router.get('/',(req,res)=>{
-    res.locals.adminLogin = false
-    res.render('login/login')
+    res.render('login/login', {admin:false})
 })
 
 router.post('/eventadmin',async(req,res)=>{
     var ob = await eventAdmin.findOne({userName:req.body.userName, password:req.body.password})
     if(ob){
-        req.session.eventAdmin=ob
-        res.send(ob)
+        req.session.userObject=ob
+        req.session.userType= 'eventAdmin'
+        res.redirect('/eventAdmin')
     }else{
         res.redirect('/login')
     }
@@ -21,12 +21,12 @@ router.post('/eventadmin',async(req,res)=>{
 
 //system admin login
 router.get('/admin',(req,res)=>{
-    res.locals.adminLogin = true
-    res.render('login/login')
+    res.render('login/login',{admin:true})
 })
 
 router.post('/admin',(req,res)=>{
-    req.session.systemAdmin = true
+    req.session.userObject = null
+    req.session.userType = 'systemAdmin'
     res.redirect('/dashboard') 
 })
 

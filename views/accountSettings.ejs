@@ -1,0 +1,20 @@
+<br>
+<br>
+<hr>
+account settings <br>
+<form action="<%= actionBasic %>" method="POST">
+    name: <input type="text" name="name" value="<%= user.name %>"><br>
+    address: <input type="text" name="address" value="<%= user.address %>"><br>
+    Email: <input type="text" name="email" value="<%= user.email %>"><br>
+    mobile: <input type="text" name="mobile" value="<%= user.mobile %>"><br>
+    <button type="submit">Update details</button>
+</form>
+<br><hr>
+
+<form action="<%= actionLogin %>" method="POST">
+    userName: <input type="text" name="userName" value="<%= user.userName %>"><br>
+    OLD password: <input type="pssword" name="oldPassword"><br>
+    new password: <input type="password" name="newPassword"><br>
+    confirmPassword: <input type="password" name="confirmPassword"><br>
+    <button type="submit">update login details</button>
+</form>

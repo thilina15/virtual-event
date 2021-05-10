@@ -3,9 +3,10 @@ const { find, findById } = require('../models/event')
 const router = express.Router()
 const event = require('../models/event')
 const eventAdmin = require('../models/eventAdmin')
+const adminAuth = require('../auth/userAuth').systemAdmin
 
 //add new event
-router.get('/new/:id',async(req,res)=>{
+router.get('/new/:id',adminAuth,async(req,res)=>{
     const ob = await eventAdmin.findById(req.params.id)
     if(ob){
         try{

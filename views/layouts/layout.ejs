@@ -8,9 +8,11 @@
 </head>
 <body>
     <h1><center><u>Virtual Event</u></center></h1>
-    <% if(locals.systemAdmin){ %> 
+    <% if(locals.userType=='systemAdmin'){ %> 
         <%- include('../navBars/ownerNav') %>
-    <% } %>  
+    <% } else if(locals.userType=='eventAdmin'){%>  
+        <%- include('../navBars/eventAdminNav') %>
+    <% } %> 
     <%- body %> 
 </body>
 </html>

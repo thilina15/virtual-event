@@ -1,0 +1,9 @@
+this is event admin dashboard <br>
+<% if(events){
+    events.forEach(event=>{ %>
+    <div>
+        <a href="/event/<%=event.id%>">event</a>
+        <br>
+    </div>
+    <% })
+} %> 
