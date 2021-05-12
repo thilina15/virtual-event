@@ -17,6 +17,7 @@ const loginRoute = require('./routes/login')
 const dashBoard = require('./routes/dashBoard')
 const eventAdmin = require('./routes/eventadmin')
 const event = require('./routes/event')
+const exhibitorRoute = require('./routes/exhibitor')
 
 //app config
 app.set('view engine','ejs')
@@ -54,5 +55,6 @@ app.use('/login',loginRoute)
 app.use('/dashboard',dashBoard)
 app.use('/eventadmin',eventAdmin)
 app.use('/event',event)
+app.use('/exhibitor',exhibitorRoute)
 
 app.listen(process.env.PORT||3000)

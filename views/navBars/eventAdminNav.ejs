@@ -1,3 +1,6 @@
 eventAdmin panel <br>
 <a href="/eventadmin">home</a>
-<a href="/eventadmin/account">account</a>
+<a href="/eventadmin/account">account</a><hr><br>
+<% if(locals.event){ %> 
+    <%- include('../navBars/eventNav') %>
+<% } %> 

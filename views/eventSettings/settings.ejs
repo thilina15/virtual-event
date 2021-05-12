@@ -1,0 +1,19 @@
+<form action="/event/settings/<%=locals.event._id %>" method="POST">
+
+name: <input type="text" name="name" value="<%=locals.event.name %>"><br>
+description: <input type="text" name="description" value="<%=locals.event.description %>"><br>
+layout: <select name="layout" >
+            <option value="1"> 1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+        </select>
+<hr>
+stall package 1 price: <input type="number" name="p1" value="<%=locals.event.stallPackage01 %>"><br>
+stall package 2 price: <input type="number" name="p2" value="<%=locals.event.stallPackage02 %>"><br>
+stall package 3 price: <input type="number" name="p3" value="<%=locals.event.stallPackage03 %>"><br>
+<hr>
+notic board image: <input type="file" name="image">
+<br>
+<button type="submit"> save changes</button>
+
+</form>
