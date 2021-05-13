@@ -23,6 +23,7 @@ const exhibitorRoute = require('./routes/exhibitor')
 app.set('view engine','ejs')
 app.set('layout', 'layouts/layout')
 app.use(expressEjsLayouts)
+app.use('/public',express.static('public'))
 app.use(bodyParser.urlencoded({limit:'10mb' , extended: false}))
 
 //session
