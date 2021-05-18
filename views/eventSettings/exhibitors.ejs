@@ -1,1 +1,15 @@
 exhibitors page
+<br>
+<div>
+    <a href="/exhibitor/add/<%=locals.event._id%>">add new exhibitor</a>  
+    <br>
+    <form action=""></form>
+</div>
+<hr>
+
+<% if(exhibitors){%>
+    <% exhibitors.forEach(exhibitor=>{%> 
+        <div> <%=exhibitor.name%> </div>
+    
+    <%})%>
+<%}%> 

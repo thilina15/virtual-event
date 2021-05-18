@@ -1,6 +1,8 @@
 const express = require('express')
 const router = express.Router()
 const event = require('../models/event')
+const exhibitor = require('../models/exhibitor')
+const {v4: uuidv4} = require('uuid')
 const eventAdminAuth = require('../auth/userAuth').eventAdmin
 
 
@@ -10,9 +12,10 @@ const eventAdminAuth = require('../auth/userAuth').eventAdmin
 router.get('/all/:eventID',eventAdminAuth,async(req,res)=>{
     try{
         var ob = await event.findById(req.params.eventID)
+        var exhibitors = await exhibitor.find({eventID:req.params.eventID})
         if(ob){
             res.locals.event=ob
-            res.render('eventSettings/exhibitors')
+            res.render('eventSettings/exhibitors',{exhibitors:exhibitors})
         }else{
             res.send('no event')
         }
@@ -20,6 +23,42 @@ router.get('/all/:eventID',eventAdminAuth,async(req,res)=>{
         res.send(err)
     }
     
+})
+
+//add new exhibitor
+router.get('/add/:eventID',eventAdminAuth,async(req,res)=>{
+    try{
+        var ob = await event.findById(req.params.eventID)
+        if(ob){
+            res.locals.event = ob
+            res.render('eventSettings/newExhibitor')
+        }else{
+            res.send('no event')
+        }
+    }catch(err){
+        res.send(err)
+    }
+})
+
+//save new exhibitor
+router.post('/add/:eventID',eventAdminAuth,async(req,res)=>{
+    var ob = new exhibitor({
+        name:req.body.name,
+        address:req.body.address,
+        email:req.body.email,
+        mobile:req.body.mobile,
+        eventID:req.params.eventID,
+        userName:req.body.name + uuidv4()+Date.now(),
+        password:uuidv4()
+    })
+    try{
+        await ob.save()
+        var ev = await event.findById(req.params.eventID)
+        res.locals.event = ev
+        res.render('eventSettings/loginDetails',{userName:ob.userName, password:ob.password})
+    }catch(err){
+        res.send(err)
+    }
 })
 
 module.exports = router

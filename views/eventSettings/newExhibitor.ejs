@@ -1,0 +1,9 @@
+add new exhibitor
+<br><hr>
+<form action="/exhibitor/add/<%=locals.event._id%>" method="POST">
+    name: <input type="text" name="name" required>
+    address: <input type="text" name="address" required>
+    email: <input type="text" name="email" required>
+    mobile: <input type="text" name="mobile" required>
+    <button type="submit">add</button>
+</form>
