@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const eventAdmin = require('../models/eventAdmin')
+const exhibitor = require('../models/exhibitor')
 
 //event admins and exhibitors login
 router.get('/',(req,res)=>{
@@ -13,6 +14,18 @@ router.post('/eventadmin',async(req,res)=>{
         req.session.userObject=ob
         req.session.userType= 'eventAdmin'
         res.redirect('/eventAdmin')
+    }else{
+        res.redirect('/login')
+    }
+})
+
+//login exhibitor
+router.post('/exhibitor',async(req,res)=>{
+    var ob = await exhibitor.findOne({userName:req.body.userName, password:req.body.password})
+    if(ob){
+        req.session.userObject=ob
+        req.session.userType= 'exhibitor'
+        res.redirect('/exhibitor')
     }else{
         res.redirect('/login')
     }

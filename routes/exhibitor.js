@@ -4,9 +4,17 @@ const event = require('../models/event')
 const exhibitor = require('../models/exhibitor')
 const {v4: uuidv4} = require('uuid')
 const eventAdminAuth = require('../auth/userAuth').eventAdmin
+const exhibitorAuth = require('../auth/userAuth').exhibitor
+const stall = require('../models/stall')
+const advertise = require('../models/advertise')
 
 
-
+//exhibitor dashboard
+router.get('/',exhibitorAuth,async(req,res)=>{
+    var stalls = await stall.find({})
+    var ads = await advertise.find({})
+    res.render('EX_dashboard',{stalls:stalls,adds:ads})
+})
 
 //view exhibitors for given event
 router.get('/all/:eventID',eventAdminAuth,async(req,res)=>{
