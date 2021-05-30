@@ -10,8 +10,10 @@ const eventAdminAuth = require('../auth/userAuth').eventAdmin
 const multer = require('multer')
 const aws = require('aws-sdk')
 const s3 = new aws.S3({
-    accessKeyId:"AKIASNTBNYDRYSNLE2UV",
-    secretAccessKey:"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"
+    // accessKeyId:"AKIASNTBNYDRYSNLE2UV",
+    // secretAccessKey:"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"
+    accessKeyId:"AKIASNTBNYDRWVQRKTHE",
+    secretAccessKey:"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"
 })
 const bucketName = 'jerax-bucket'
 const storage = multer.memoryStorage()
@@ -25,18 +27,20 @@ router.get('/new/:id',adminAuth,async(req,res)=>{
         try{
             var ev = new event({
                 eventAdmin:ob.id,
-                name:'test'
+                name:ob.name+"'s New Event..",
+                description: "Event Admin didn't change the description yet"
             })
             await ev.save()
-            res.redirect('/dashboard')
-            console.log('done')
+            var message = "event added successfully..!"
+            res.redirect('/dashboard/?success='+message)
         }catch(err){
-            res.redirect('/dashboard')
+            var message = "something went wrong..!"
+            res.redirect('/dashboard/?error='+message)
             console.log(err)
         }
     }else{
-        res.redirect('/dashboard')
-        console.log('no OB')
+        var message = "something went wrong..!"
+        res.redirect('/dashboard/?error='+message)
     }
 })
 

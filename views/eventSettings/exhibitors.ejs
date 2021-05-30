@@ -8,8 +8,38 @@ exhibitors page
 <hr>
 
 <% if(exhibitors){%>
-    <% exhibitors.forEach(exhibitor=>{%> 
-        <div> <%=exhibitor.name%> </div>
-    
-    <%})%>
+        <table class="table table-sm table-dark">
+            <thead>
+              <tr>
+                <th scope="col"></th>
+                <th scope="col">Stall 1 Package</th>
+                <th scope="col">Stall 2 Package</th>
+                <th scope="col">Stall 3 Package</th>
+                <th scope="col">Advertising Space</th>
+              </tr>
+            </thead>
+            <tbody>
+                <% exhibitors.forEach(exhibitor=>{%>
+                    <tr>
+                        <td>
+                            <%=exhibitor.name%> - <%=exhibitor.address%>
+                        </td>
+                        <td>
+                           <a href="#">ADD</a> 
+                        </td>
+                        <td>
+                            <a href="#">ADD</a>
+                        </td>
+                        <td>
+                            <a href="#">ADD</a>
+                        </td>
+                        <td>
+                            <a href="#">ADD</a>
+                        </td>
+                    </tr>
+                <%}) %>   
+            </tbody>
+          </table>
 <%}%> 
+
+

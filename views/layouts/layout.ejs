@@ -11,6 +11,7 @@
 
 </head>
 <body>
+    
     <h1><center><u>Virtual Event</u></center></h1>
     <% if(locals.userType=='systemAdmin'){ %> 
         <%- include('../navBars/ownerNav') %>
@@ -18,7 +19,19 @@
         <%- include('../navBars/eventAdminNav') %>
     <% } %> 
         
-
-    <%- body %> 
+    <div class="container">
+        <% if(locals.success) {%>
+            <div class="alert alert-success"  role="alert">
+                <%=locals.success%> 
+              </div>
+        <% } %>
+        <% if(locals.error) {%>
+            <div class="alert alert-danger"  role="alert">
+                <%=locals.error%> 
+              </div>
+        <% } %>   
+        <%- body %>
+    </div>
+     
 </body>
 </html>

@@ -56,25 +56,36 @@ router.post('/accountupdate',eventAdminAuth,async(req,res)=>{
         ob.email=req.body.email
         ob.mobile=req.body.mobile
         await ob.save()
-        res.redirect('/eventadmin/account')
+        var message = "account details updated successfully..!"
+        res.redirect('/eventadmin/account/?success='+message)
     }else{
-        res.redirect('/eventadmin')
+        var message = "something went wrong..!"
+        res.redirect('/eventadmin/?error='+message)
     }
 })
 
 router.post('/loginupdate',eventAdminAuth,async(req,res)=>{
     var ob = await eventAdmin.findById(req.session.userObject._id)
+    var sameUsers = await eventAdmin.find({userName:req.body.userName, _id:{$ne:req.session.userObject._id}})
+    if(sameUsers.length>0){
+        var message = "userName is already taken. Try a different one..!"
+        res.redirect('/eventadmin/account/?error='+message)
+        return
+    }
     if(ob){
         if(ob.password===req.body.oldPassword && req.body.newPassword===req.body.confirmPassword){
             ob.userName=req.body.userName
             ob.password=req.body.newPassword
             await ob.save()
-            res.redirect('/eventadmin/account')
+            var message = "login details updated successfully..!"
+            res.redirect('/eventadmin/account/?success='+message)
         }else{
-            res.send('wrond details')
+            var message = "wrong details entered..!"
+            res.redirect('/eventadmin/account/?error='+message)
         }
     }else{
-        res.redirect('/eventadmin')
+        var message ="something went wrong..!"
+        res.redirect('/eventadmin/?error='+message)
     }
 })
 

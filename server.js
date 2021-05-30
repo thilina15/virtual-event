@@ -43,10 +43,16 @@ const db = mongoose.connection
 db.on('error', error => console.error(error))
 db.once('open', ()=> console.log('connected to mongoose')) 
 
-//setup the user
+//setup the user and alert messages
 app.use((req,res,next)=>{
     if(req.session.userType){
         res.locals.userType = req.session.userType
+    }
+    if(req.query.success){
+        res.locals.success = req.query.success
+    }
+    if(req.query.error){
+        res.locals.error = req.query.error
     }
     next()
 })

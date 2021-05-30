@@ -1,9 +1,25 @@
-this is event admin dashboard <br>
+<br>
 <% if(events){
     events.forEach(event=>{ %>
     <div>
-        <a href="/event/<%=event.id%>">event</a>
-        <br>
+        
+        <center>
+            <div class="col-md-8">
+                <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+                  <div class="col p-4 d-flex flex-column position-static">
+                    <strong class="d-inline-block mb-2 text-primary">EVENT</strong>
+                    <h3 class="mb-0"><%=event.name%></h3>
+                    <p class="card-text mb-auto"><%=event.description%></p>
+                    <a href="/event/<%=event.id%>" class="stretched-link">visit Event</a>
+                  </div>
+                  <div class="col-auto d-none d-lg-block">
+                    <img src="https://310inc.com/wp-content/uploads/2017/05/events_medium.jpg" alt="">
+                  </div>
+                </div>
+              </div>
+        </center>
     </div>
     <% })
 } %> 
+
+
