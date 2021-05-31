@@ -10,12 +10,10 @@ const eventAdminAuth = require('../auth/userAuth').eventAdmin
 const multer = require('multer')
 const aws = require('aws-sdk')
 const s3 = new aws.S3({
-    // accessKeyId:"AKIASNTBNYDRYSNLE2UV",
-    // secretAccessKey:"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"
-    accessKeyId:"AKIASNTBNYDRWVQRKTHE",
-    secretAccessKey:"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"
+    accessKeyId:process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey:process.env.AWS_SECRET_ACCESS_KEY
 })
-const bucketName = 'jerax-bucket'
+const bucketName = process.env.AWS_BUCKET_NAME
 const storage = multer.memoryStorage()
 const upload = multer({storage:storage})
 
