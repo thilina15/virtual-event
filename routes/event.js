@@ -1,3 +1,7 @@
+if (process.env.NODE_ENV !== 'production'){
+    require('dotenv').config({path:'../.env'})   
+}
+
 const express = require('express')
 const { find, findById } = require('../models/event')
 const router = express.Router()
