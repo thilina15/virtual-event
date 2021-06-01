@@ -19,13 +19,18 @@ style="
     
 <br><br><center><h1>VIRTUAL EVENT</h1></center>
 
+<!-- nav bars -->
+<% if(locals.userType){ %> 
     
     <% if(locals.userType=='systemAdmin'){ %> 
         <%- include('../navBars/ownerNav') %>
     <% } else if(locals.userType=='eventAdmin'){%>  
         <%- include('../navBars/eventAdminNav') %>
     <% } %> 
-    
+<% }else{ %> 
+    <%- include('../navBars/baseNav') %>
+<% } %>    
+ 
     <div class="container">
         <% if(locals.success) {%>
             <div class="alert alert-success"  role="alert">

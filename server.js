@@ -9,6 +9,8 @@ const mongoose = require('mongoose')
 const session = require('express-session')
 const {v4: uuidv4} = require('uuid')
 
+
+
 const app = express()
 
 //import routes
@@ -19,6 +21,7 @@ const eventAdmin = require('./routes/eventadmin')
 const event = require('./routes/event')
 const exhibitorRoute = require('./routes/exhibitor')
 const logOutRoute = require('./routes/logOut')
+const email = require('./routes/email')
 
 //app config
 app.set('view engine','ejs')
@@ -35,7 +38,8 @@ app.use(session({
 }))
 
 //databse connection
-mongoose.connect(process.env.DATABASE_URL,{
+//mongoose.connect(process.env.DATABASE_URL,{
+mongoose.connect(process.env.DATABASE_URL_LOCAL,{
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false, 
@@ -65,5 +69,6 @@ app.use('/eventadmin',eventAdmin)
 app.use('/event',event)
 app.use('/exhibitor',exhibitorRoute)
 app.use('/logout',logOutRoute)
+app.use('/email',email)
 
 app.listen(process.env.PORT||3000)

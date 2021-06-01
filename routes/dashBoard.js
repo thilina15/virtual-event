@@ -17,10 +17,6 @@ router.get('/eventadmins',adminAuth,async(req,res)=>{
     res.render('ownerDashboard/eventAdmins',{eventAdmins:admins})
 })
 
-//new event admin
-router.get('/newEventAdmin',adminAuth,(req,res)=>{
-    res.render('ownerDashboard/newEventAdmin')
-})
 
 
 module.exports = router

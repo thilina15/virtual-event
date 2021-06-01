@@ -5,22 +5,36 @@ const event = require('../models/event')
 const {v4: uuidv4} = require('uuid')
 const eventAdminAuth = require('../auth/userAuth').eventAdmin
 const adminAuth = require('../auth/userAuth').systemAdmin
+const { route } = require('./event')
 
-//add new event admin
-router.post('/new',adminAuth,async(req,res)=>{
+
+//add new event Admin
+router.get('/new',(req,res)=>{
+    res.render('ownerDashboard/newEventAdmin')
+})
+
+router.post('/new',async(req,res)=>{
+    var sameUsers = await eventAdmin.find({userName:req.body.userName})
+    if(sameUsers.length>0){
+        var message = "User Name already exist.. try a different one.."
+        res.redirect('/eventadmin/new/?error='+message)
+        return
+    }
     var ob = new eventAdmin({
         name:req.body.name,
         address:req.body.address,
         email:req.body.email,
         mobile:req.body.mobile,
-        userName:req.body.name + uuidv4()+Date.now(),
-        password:uuidv4()
+        userName:req.body.userName,
+        password:req.body.password
     })
     try{
         await ob.save()
-        res.render('ownerDashboard/loginDetails',{userName:ob.userName, password:ob.password})
+        var message = "Account created successfully..! Now you can login."
+        res.redirect('/login/?success='+message)
     }catch(err){
-        res.send(err)
+        var message = "Something went wrong... Try Again.."
+        res.redirect('/eventadmin/new/?error='+message)
     }
     
 })
@@ -48,6 +62,7 @@ router.get('/account',eventAdminAuth,async(req,res)=>{
     }
 })
 
+//contact details update
 router.post('/accountupdate',eventAdminAuth,async(req,res)=>{
     var ob =await eventAdmin.findById(req.session.userObject._id)
     if(ob){
@@ -64,6 +79,7 @@ router.post('/accountupdate',eventAdminAuth,async(req,res)=>{
     }
 })
 
+//update login details
 router.post('/loginupdate',eventAdminAuth,async(req,res)=>{
     var ob = await eventAdmin.findById(req.session.userObject._id)
     var sameUsers = await eventAdmin.find({userName:req.body.userName, _id:{$ne:req.session.userObject._id}})

@@ -26,5 +26,5 @@ function exhibitorAuth(req,res,next){
 module.exports = {
     systemAdmin:systemAdminAuth,
     exhibitor:exhibitorAuth,
-    eventAdmin:eventAdminAuth
+    eventAdmin:eventAdminAuth   
 }

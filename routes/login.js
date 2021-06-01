@@ -8,6 +8,7 @@ router.get('/',(req,res)=>{
     res.render('login/login', {admin:false})
 })
 
+//login event admin
 router.post('/eventadmin',async(req,res)=>{
     var ob = await eventAdmin.findOne({userName:req.body.userName, password:req.body.password})
     if(ob){
@@ -46,6 +47,12 @@ router.post('/admin',(req,res)=>{
     req.session.userType = 'systemAdmin'
     var message = "User Login as System Owner Successfully..!"
     res.redirect('/dashboard/?success='+message) 
+})
+
+
+//make your own event login
+router.get('/forevent',(req,res)=>{
+    res.render('login/EA_login')
 })
 
 
