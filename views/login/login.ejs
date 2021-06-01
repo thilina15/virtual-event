@@ -1,34 +1,48 @@
 
+<center>
+<br><br><br><br><br>
+    <div class="row-cols-md-2">
+        <% if (admin) { %>
+    
+            <form class="form-signin" action="/login/admin" method="POST">
+                <h1 class="h3 mb-3 font-weight-normal">Please sign in as System Owner..</h1>
+                <label class="sr-only">User Name</label>
+                <input type="text" class="form-control" placeholder="User Name" name="userName" >
+                <label  class="sr-only">Password</label>
+                <input type="password"  class="form-control" placeholder="Password" name="password">
+                <br>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+            </form>
+        <% }else  {%> 
+                <form class="form-signin" action="/login/eventadmin" method="POST">
+                    <h1 class="h3 mb-3 font-weight-normal">Please sign in as Event Admin..</h1>
+                    <label class="sr-only">User Name</label>
+                    <input type="text" class="form-control" placeholder="User Name" name="userName" >
+                    <label  class="sr-only">Password</label>
+                    <input type="password"  class="form-control" placeholder="Password" name="password">
+                    <br>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                </form>
+                
+                <br><hr><br>
+            
+                <form class="form-signin" action="/login/exhibitor" method="POST">
+                    <h1 class="h3 mb-3 font-weight-normal">Please sign in as Exhibitor..</h1>
+                    <label class="sr-only">User Name</label>
+                    <input type="text" class="form-control" placeholder="User Name" name="userName" >
+                    <label  class="sr-only">Password</label>
+                    <input type="password"  class="form-control" placeholder="Password" name="password">
+                    <br>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                </form>
+        <% } %> 
+    </div>
+
+</center>
 
 
 
+ 
 
-<% if (admin) { %>
-    <br>
-    <center>
-        <h3>System Admin Login</h3>
-    </center>
-    <br>
-    <hr>
-    <form action="/login/admin" method="POST">
-        name: <input type="text" name="userName">
-        passwword: <input type="password" name="password">
-        <button type="submit">LOGIN</button>
-    </form>    
-<% }else  {%> 
-    <h1>login as event admin</h1>
-    <form action="/login/eventadmin" method="POST">
-        name: <input type="text" name="userName">
-        passwword: <input type="password" name="password">
-        <button type="submit">LOGIN</button>
-    </form>
 
-    <br><hr>
 
-    <h1>login as exhibitor</h1>
-    <form action="/login/exhibitor" method="POST">
-        name: <input type="text" name="userName">
-        passwword: <input type="password" name="password">
-        <button type="submit">LOGIN</button>
-    </form>
-<% } %>  

@@ -13,9 +13,11 @@ router.post('/eventadmin',async(req,res)=>{
     if(ob){
         req.session.userObject=ob
         req.session.userType= 'eventAdmin'
-        res.redirect('/eventAdmin')
+        var message = "User Login as Event Admin Successfully..!"
+        res.redirect('/eventAdmin/?success='+message)
     }else{
-        res.redirect('/login')
+        var message = "invalid login details.."
+        res.redirect('/login/?error='+message)
     }
 })
 
@@ -25,9 +27,11 @@ router.post('/exhibitor',async(req,res)=>{
     if(ob){
         req.session.userObject=ob
         req.session.userType= 'exhibitor'
-        res.redirect('/exhibitor')
+        var message = "User Login as Exhibitor Successfully..!"
+        res.redirect('/exhibitor/?success='+message)
     }else{
-        res.redirect('/login')
+        var message = "invalid login details.."
+        res.redirect('/login/?error='+message)
     }
 })
 
@@ -40,7 +44,8 @@ router.get('/admin',(req,res)=>{
 router.post('/admin',(req,res)=>{
     req.session.userObject = null
     req.session.userType = 'systemAdmin'
-    res.redirect('/dashboard') 
+    var message = "User Login as System Owner Successfully..!"
+    res.redirect('/dashboard/?success='+message) 
 })
 
 

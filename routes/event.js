@@ -30,7 +30,8 @@ router.get('/new/:id',adminAuth,async(req,res)=>{
             var ev = new event({
                 eventAdmin:ob.id,
                 name:ob.name+"'s New Event..",
-                description: "Event Admin didn't change the description yet"
+                description: "Event Admin didn't change the description yet",
+                notice:"/public/images/UploadNoticeBoard.jpg"
             })
             await ev.save()
             var message = "event added successfully..!"

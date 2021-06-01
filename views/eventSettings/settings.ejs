@@ -1,20 +1,48 @@
+
 <form action="/event/settings/<%=locals.event._id %>" method="POST" enctype="multipart/form-data">
+    <div class="form-group">
+      <label >Name</label>
+      <input type="text" class="form-control" value="<%=locals.event.name %>" name="name">
+    </div>
+    <div class="form-group">
+        <label >Description</label>
+        <textarea class="form-control" rows="5" name="description"><%=locals.event.description %></textarea>
+    </div>
 
-name: <input type="text" name="name" value="<%=locals.event.name %>"><br>
-description: <input type="text" name="description" value="<%=locals.event.description %>"><br>
-layout: <select name="layout" >
-            <option value="1"> 1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-        </select>
-<hr>
-stall package 1 price: <input type="number" name="p1" value="<%=locals.event.stallPackage01 %>"><br>
-stall package 2 price: <input type="number" name="p2" value="<%=locals.event.stallPackage02 %>"><br>
-stall package 3 price: <input type="number" name="p3" value="<%=locals.event.stallPackage03 %>"><br>
-<hr>
-<img src="<%=locals.event.notice %>" alt="" width="300px" height="200px">
-notic board image: <input type="file" name="image" >
-<br>
-<button type="submit"> save changes</button>
-
-</form>
+    <div class="form-group">
+      <label for="exampleFormControlSelect1">Layout</label>
+      <select class="form-control" name="layout">
+        <option value="1">Layout 1</option>
+        <option value="2">Layout 2</option>
+        <option value="3">Layout 3</option>
+      </select>
+    </div>
+    <div class="row">
+        <div class="form-group col">
+            <label >Stall Package 1 Price</label>
+            <input type="number" class="form-control" name="p1" value="<%=locals.event.stallPackage01 %>">
+        </div>
+        <div class="form-group col">
+            <label >Stall Package 2 Price</label>
+            <input type="number" class="form-control" name="p2" value="<%=locals.event.stallPackage02 %>">
+        </div>
+        <div class="form-group col">
+            <label >Stall Package 3 Price</label>
+            <input type="number" class="form-control" name="p3" value="<%=locals.event.stallPackage03 %>">
+        </div>
+    </div>
+    <br><br>
+    <img src="<%=locals.event.notice %>" class="rounded mx-auto d-block" alt="Event Notice Board Image" width="600px" height="400px">
+    
+    <div class="form-group">
+        <label class="form-label" for="customFile">Add New Notice Board Image</label>
+        <input type="file" class="form-control" name="image">
+    </div>
+    
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Apply Changes</button>
+    </div>
+    
+    
+    
+  </form>
