@@ -22,7 +22,34 @@ const storage = multer.memoryStorage()
 const upload = multer({storage:storage})
 
 
-//add new event
+//view Event request form
+router.get('/request',eventAdminAuth,(req,res)=>{
+    res.render('eventRequest')
+})
+
+//approve event
+router.get('/approve/:id',adminAuth,async(req,res)=>{
+    var ob = await event.findById(req.params.id)
+    ob.state = 'active'
+    await ob.save()
+    var message = 'event is now active'
+    res.redirect('/dashboard/?success='+message)
+})
+
+//deny event
+router.get('/deny/:id',adminAuth,async(req,res)=>{
+    try{
+        await event.findByIdAndRemove(req.params.id)
+        var message = 'event removed successfully..!'
+        res.redirect('/dashboard/requests/?success='+message)
+    }catch(err){
+        var message = 'something went wrone..!'
+        res.redirect('/dashboard/?error='+message)
+    }
+    
+})
+
+//add new event from system owner (status -> active)
 router.get('/new/:id',adminAuth,async(req,res)=>{
     const ob = await eventAdmin.findById(req.params.id)
     if(ob){
@@ -30,8 +57,7 @@ router.get('/new/:id',adminAuth,async(req,res)=>{
             var ev = new event({
                 eventAdmin:ob.id,
                 name:ob.name+"'s New Event..",
-                description: "Event Admin didn't change the description yet",
-                notice:"/public/images/UploadNoticeBoard.jpg"
+                state:'active'
             })
             await ev.save()
             var message = "event added successfully..!"
@@ -98,5 +124,8 @@ router.post('/settings/:eventID',eventAdminAuth,upload.single('image'),async(req
 
     }
 })
+
+
+
 
 module.exports = router

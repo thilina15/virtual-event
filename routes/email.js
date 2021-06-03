@@ -6,6 +6,8 @@ if (process.env.NODE_ENV !== 'production'){
 const express = require('express')
 const router = express.Router()
 const nodeMailer = require('nodemailer')
+const eventAdminAuth = require('../auth/userAuth').eventAdmin
+const event = require('../models/event')
 
 //config email
 const transpoter = nodeMailer.createTransport({
@@ -16,24 +18,48 @@ const transpoter = nodeMailer.createTransport({
     }
 })
 
-//build mail
-const mailOptions = {
-    from: 'thibbatz@gmail.com',
-    to: 'aluthgethilina@gmail.com',
-    subject: 'email from the node',
-    text: 'sending Email test'
-}
 
-router.get('/',(req,res)=>{
-    res.send('hellow')
-    transpoter.sendMail(mailOptions,(err,info)=>{
-        if(err){
-            console.log(err)
-        }else{
-            console.log('done')
-        }
+//event request
+router.post('/eventrequest',eventAdminAuth,async(req,res)=>{
+    var ob = new event({ //this event in pending state
+        request:req.body.description,
+        name:req.body.name,
+        eventAdmin: req.session.userObject._id
     })
+    //build email body
+    var emailMessage = 'Dear Admin, \n'+ req.session.userObject.name+ ' has made an event request. login to your admin panel to handdle this request..\n \n'
+    var eventDescription = 'Event Name: '+req.body.name+ '\nEvent Description: '+req.body.description+'\n \n'
+    var contact = 'Event Admin,\n name: '+req.session.userObject.name+'\n E-mail: '+req.session.userObject.email+'\n Mobile: '+req.session.userObject.mobile
+    var finalEmail = emailMessage+eventDescription+contact
+    //build mail (sending to system owner)
+    var mailOptions = {
+        from: process.env.EMAIL,
+        to: process.env.EMAIL,
+        subject: 'New Event is waiting..',
+        text:finalEmail
+    }
+    try{
+        await ob.save()
+        transpoter.sendMail(mailOptions,(err,info)=>{
+            if(err){
+                var message = "system error.. contact us for help..!"
+                res.redirect('/eventadmin/?error='+message)
+            }else{
+                var message = "request sent successfully..!"
+                res.redirect('/eventadmin/?success='+message)
+            }
+        })
+    }catch(err){
+        var message = "something went Wrong.. try again"
+        res.redirect('/eventadmin/?error='+message)
+    }
 })
+
+
+
+
+
+
 
 
 

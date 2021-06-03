@@ -41,7 +41,7 @@ router.post('/new',async(req,res)=>{
 
 //dashboard
 router.get('/',eventAdminAuth,async(req,res)=>{  
-    var ob = await event.find({eventAdmin:req.session.userObject._id})
+    var ob = await event.find({eventAdmin:req.session.userObject._id, state:'active'})
     if(ob){
         res.render('EA_dashboard',{events:ob})
     }else{

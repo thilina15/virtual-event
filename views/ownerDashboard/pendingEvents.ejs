@@ -1,0 +1,35 @@
+<br>
+<center>
+    <h3>PENDING EVENTS</h3>
+</center>
+<br>
+<hr>
+
+
+
+
+<table class="table table-sm table-dark">
+    <thead>
+      <tr>
+        <th scope="col">Admin Name</th>
+        <th scope="col">Event Name</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+        <% events.forEach(event=>{%>
+            <tr>
+                <td>
+                    <%=event.eventAdmin.name%>
+                </td>
+                <td>
+                    <%=event.name%>
+                </td>
+                <td>
+                    <a href="/event/approve/<%=event.id%>">active</a>
+                    <a href="/event/deny/<%=event.id%>">delete</a>
+                </td>
+            </tr>
+        <%}) %>   
+    </tbody>
+  </table>
