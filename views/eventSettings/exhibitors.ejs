@@ -25,7 +25,9 @@ exhibitors page
                             <%=exhibitor.name%> - <%=exhibitor.address%>
                         </td>
                         <td>
-                           <a href="#">ADD</a> 
+                           <form action="/stall/package1/<%=exhibitor.id%>" method="POST">
+                            <button type="submit">ADD</button>
+                            </form>
                         </td>
                         <td>
                             <a href="#">ADD</a>

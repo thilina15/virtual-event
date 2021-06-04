@@ -2,11 +2,11 @@ const mongoose = require('mongoose')
 const stall = new mongoose.Schema({
     name:{
         type:String,
-        required:true
+        default:'Stall Name'
     },
     description:{
         type:String,
-        required:true
+        default:'Stall Description'
     },
     model:{
         type:Number,
@@ -27,15 +27,15 @@ const stall = new mongoose.Schema({
     webSite:String,
     nameImage:{
         type:String,
-        required:true
+        default:'/public/images/stallName.jpg'
     },
     logoImage:{
         type:String,
-        required:true
+        default:'/public/images/logoImage.jpg'
     },
     poster1:{
         type:String,
-        required:true   
+        default:'/public/images/Poster.jpg'
     },
     poster2:String,
     poster3:String,

@@ -1,16 +1,34 @@
-this is exhibitor dashboard
-<br><hr>
-<h3>stalls</h3>
-<br>
-<% stalls.forEach(stall=>{%>
-    <%=stall.name %>
-    <br> 
-<% }) %>
+<div class="row">
+    <div class="col-sm-6">
+        <h3><center>STALLS</center> </h3>
+        <br>
+    </div>
+    <div class="col-sm-6">
+        <h3><center>ADVERTISEMENTS</center> </h3>
+        <br>
+    </div>
+</div>
 
-<br><hr>
-<h3>adds</h3>
-<br>
-<% adds.forEach(add=>{%>
-    <%=add.headline %>
-    <br> 
-<% }) %> 
+
+<% if(stalls){
+    stalls.forEach(stall=>{ %>
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body row">
+                    <div class="col-sm-8">
+                        <h5 class="card-title"><%=stall.name%></h5>
+                        <p class="card-text"><%=stall.description%></p>
+                        <a href="/stall/<%=stall.id%>" class="btn btn-primary">Visit Stall</a>
+                    </div>
+                    <div class="col-sm-4">
+                        <img src="<%=stall.logoImage%>" height="150" width="150">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+    <% })%>
+<% } %> 
+
+
+

@@ -22,6 +22,7 @@ const event = require('./routes/event')
 const exhibitorRoute = require('./routes/exhibitor')
 const logOutRoute = require('./routes/logOut')
 const email = require('./routes/email')
+const stall = require('./routes/stall')
 
 //app config
 app.set('view engine','ejs')
@@ -70,5 +71,6 @@ app.use('/event',event)
 app.use('/exhibitor',exhibitorRoute)
 app.use('/logout',logOutRoute)
 app.use('/email',email)
+app.use('/stall',stall)
 
 app.listen(process.env.PORT||3000)

@@ -11,8 +11,8 @@ const advertise = require('../models/advertise')
 
 //exhibitor dashboard
 router.get('/',exhibitorAuth,async(req,res)=>{
-    var stalls = await stall.find({})
-    var ads = await advertise.find({})
+    var stalls = await stall.find({exhibitorID:req.session.userObject._id})
+    var ads = await advertise.find({exhibitorID:req.session.userObject._id})
     res.render('EX_dashboard',{stalls:stalls,adds:ads})
 })
 
@@ -67,6 +67,21 @@ router.post('/add/:eventID',eventAdminAuth,async(req,res)=>{
     }catch(err){
         res.send(err)
     }
+})
+
+//account settings
+router.get('/account',exhibitorAuth,async(req,res)=>{
+    var ob = await exhibitor.findById(req.session.userObject._id)
+    if(ob){
+        res.render('EX_AccountSettings',{
+            actionBasic:'/exhibitor/accountupdate',
+                actionLogin:'/exhibitor/loginupdate',
+                user:ob
+        })
+    }else{
+        res.redirect('/exhibitor')
+    }
+    
 })
 
 module.exports = router

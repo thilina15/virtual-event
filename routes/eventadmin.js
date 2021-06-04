@@ -54,7 +54,7 @@ router.get('/',eventAdminAuth,async(req,res)=>{
 router.get('/account',eventAdminAuth,async(req,res)=>{
     var ob = await eventAdmin.findById(req.session.userObject._id)
     if(ob){
-        res.render('accountSettings',{
+        res.render('EA_AccountSettings',{
             actionBasic:'/eventadmin/accountupdate',
             actionLogin:'/eventadmin/loginupdate',
             user:ob
