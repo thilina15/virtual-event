@@ -29,15 +29,16 @@ router.post('/package1/:ID',async(req,res)=>{
         })
         try{
             await st.save()
-            res.send('done')
+            var message = 'stall added successfully..!'
+            res.redirect('/exhibitor/all/'+st.eventID+'/?success='+message)
         }catch(err){
-            res.redirect('/eventadmin')
-            console.log('vvv')
+            var message = 'something went wrong check internet connection..!'
+            res.redirect('/exhibitor/all/'+st.eventID+'/?error='+message)
         }
         
     }else{
-        console.log('aaa')
-        res.redirect('/eventadmin')
+        var message = 'something went wrong..!'
+            res.redirect('/eventadmin/?error='+message)
     }
 
 })
@@ -105,6 +106,36 @@ router.post('/:stallID',exhibitorAuth,upload.fields([
     res.redirect('/stall/'+stallOB.id)
     
 
+})
+
+//view all stalls for a given event
+router.get('/all/:eventID',eventAdminAuth,async(req,res)=>{
+    try{
+        var ob = await event.findById(req.params.eventID)
+        var stalls = await stall.find({eventID:req.params.eventID})
+        if(ob){
+            res.locals.event=ob
+            res.render('eventSettings/stalls',{stalls:stalls})
+        }else{
+            res.send('no event')
+        }
+    }catch(err){
+        res.send(err)
+    }
+})
+
+//remove stall
+router.post('/remove/:stallID',eventAdminAuth,async(req,res)=>{
+    try{
+        var stallObject = await stall.findById(req.params.stallID)
+        var event = stallObject.eventID
+        await stallObject.remove()
+        var message = 'stall deleted successfully..!'
+        res.redirect('/stall/all/'+event+'/?success='+message)
+    }
+    catch(er){
+
+    }
 })
 
 

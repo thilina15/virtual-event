@@ -2,15 +2,15 @@ const mongoose = require('mongoose')
 const advertise = new mongoose.Schema({
     headline:{
         type:String,
-        required:true
+        default:'headline of the advertise'
     },
     description:{
         type:String,
-        required:true
+        default:'description of the advertise'
     },
     image:{
         type:String,
-        required:true
+        default:'/public/images/Poster.jpg'
     },
     eventID:{
         type:mongoose.Schema.Types.ObjectId,

@@ -13,7 +13,7 @@ const advertise = require('../models/advertise')
 router.get('/',exhibitorAuth,async(req,res)=>{
     var stalls = await stall.find({exhibitorID:req.session.userObject._id})
     var ads = await advertise.find({exhibitorID:req.session.userObject._id})
-    res.render('EX_dashboard',{stalls:stalls,adds:ads})
+    res.render('EX_dashboard',{stalls:stalls,ads:ads})
 })
 
 //view exhibitors for given event

@@ -1,1 +1,32 @@
-stalls page
+
+
+<% if(stalls){%>
+        <table class="table table-sm table-dark">
+            <thead>
+              <tr>
+                <th scope="col">Stall Name</th>
+                <th scope="col">Package</th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody>
+                <% stalls.forEach(stall=>{%>
+                    <tr>
+                        <td>
+                            <%=stall.name%>
+                        </td>
+                        <td>
+                            Package 0<%=stall.package%>
+                        </td>
+                        <td>
+                            <form action="/stall/remove/<%=stall.id%>" method="POST">
+                                <button type="submit">Remove</button>
+                            </form>
+                        </td>
+                    </tr>
+                <%}) %>   
+            </tbody>
+          </table>
+<%}%> 
+
+

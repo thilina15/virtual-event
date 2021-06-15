@@ -1,3 +1,4 @@
+<br>
 <div class="row">
     <div class="col-sm-6">
         <h3><center>STALLS</center> </h3>
@@ -9,10 +10,11 @@
     </div>
 </div>
 
+<div class="row">
 
-<% if(stalls){
-    stalls.forEach(stall=>{ %>
-        <div class="col-sm-6">
+<% if(stalls){%>
+    <div class="col-sm-6">
+        <%stalls.forEach(stall=>{ %>
             <div class="card">
                 <div class="card-body row">
                     <div class="col-sm-8">
@@ -25,10 +27,31 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <br>
-    <% })%>
+            <br>
+        <% })%>
+    </div>
 <% } %> 
 
 
+<% if(ads){%>
+    <div class="col-sm-6">
+        <%ads.forEach(ad=>{ %>
+            <div class="card">
+                <div class="card-body row">
+                    <div class="col-sm-8">
+                        <h5 class="card-title"><%=ad.headline%></h5>
+                        <p class="card-text"><%=ad.description%></p>
+                        <a href="/advertise/<%=ad.id%>" class="btn btn-primary">Visit Ad</a>
+                    </div>
+                    <div class="col-sm-4">
+                        <img src="<%=ad.image%>" height="150" width="150">
+                    </div>
+                </div>
+            </div>
+            <br>
+        <% })%>
+    </div>
+<% } %> 
+
+</div>
 

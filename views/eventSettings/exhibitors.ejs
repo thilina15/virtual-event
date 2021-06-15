@@ -1,4 +1,4 @@
-exhibitors page
+
 <br>
 <div>
     <a href="/exhibitor/add/<%=locals.event._id%>">add new exhibitor</a>  
@@ -36,7 +36,9 @@ exhibitors page
                             <a href="#">ADD</a>
                         </td>
                         <td>
-                            <a href="#">ADD</a>
+                            <form action="/advertise/new/<%=exhibitor.id%>" method="POST">
+                                <button type="submit">ADD</button>
+                                </form>
                         </td>
                     </tr>
                 <%}) %>   
