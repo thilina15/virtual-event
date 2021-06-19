@@ -15,6 +15,7 @@
                 <th scope="col">Stall 1 Package</th>
                 <th scope="col">Stall 2 Package</th>
                 <th scope="col">Stall 3 Package</th>
+                <th scope="col">Stall Special</th>
                 <th scope="col">Advertising Space</th>
               </tr>
             </thead>
@@ -25,15 +26,24 @@
                             <%=exhibitor.name%> - <%=exhibitor.address%>
                         </td>
                         <td>
-                           <form action="/stall/package1/<%=exhibitor.id%>" method="POST">
-                            <button type="submit">ADD</button>
+                            <form action="/stall/package1/<%=exhibitor.id%>" method="POST">
+                                <button type="submit">ADD</button>
                             </form>
                         </td>
                         <td>
-                            <a href="#">ADD</a>
+                            <form action="/stall/package2/<%=exhibitor.id%>" method="POST">
+                                <button type="submit">ADD</button>
+                            </form>
                         </td>
                         <td>
-                            <a href="#">ADD</a>
+                            <form action="/stall/package3/<%=exhibitor.id%>" method="POST">
+                                <button type="submit">ADD</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="/stall/special/<%=exhibitor.id%>" method="POST">
+                                <button type="submit">ADD</button>
+                            </form>
                         </td>
                         <td>
                             <form action="/advertise/new/<%=exhibitor.id%>" method="POST">

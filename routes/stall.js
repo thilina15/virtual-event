@@ -24,12 +24,90 @@ router.post('/package1/:ID',async(req,res)=>{
     var ex = await exhibitor.findById(req.params.ID)
     if(ex){
         var st = new stall({
+            package:1,
             exhibitorID:ex.id,
             eventID:ex.eventID
         })
         try{
             await st.save()
             var message = 'stall added successfully..!'
+            res.redirect('/exhibitor/all/'+st.eventID+'/?success='+message)
+        }catch(err){
+            var message = 'something went wrong check internet connection..!'
+            res.redirect('/exhibitor/all/'+st.eventID+'/?error='+message)
+        }
+        
+    }else{
+        var message = 'something went wrong..!'
+            res.redirect('/eventadmin/?error='+message)
+    }
+
+})
+
+//add stall package 2
+router.post('/package2/:ID',async(req,res)=>{
+    var ex = await exhibitor.findById(req.params.ID)
+    if(ex){
+        var st = new stall({
+            package:2,
+            exhibitorID:ex.id,
+            eventID:ex.eventID
+        })
+        try{
+            await st.save()
+            var message = 'stall added successfully..!'
+            res.redirect('/exhibitor/all/'+st.eventID+'/?success='+message)
+        }catch(err){
+            var message = 'something went wrong check internet connection..!'
+            res.redirect('/exhibitor/all/'+st.eventID+'/?error='+message)
+        }
+        
+    }else{
+        var message = 'something went wrong..!'
+            res.redirect('/eventadmin/?error='+message)
+    }
+
+})
+
+//add stall package 3
+router.post('/package3/:ID',async(req,res)=>{
+    var ex = await exhibitor.findById(req.params.ID)
+    if(ex){
+        var st = new stall({
+            package:3,
+            exhibitorID:ex.id,
+            eventID:ex.eventID
+        })
+        try{
+            await st.save()
+            var message = 'stall added successfully..!'
+            res.redirect('/exhibitor/all/'+st.eventID+'/?success='+message)
+        }catch(err){
+            var message = 'something went wrong check internet connection..!'
+            res.redirect('/exhibitor/all/'+st.eventID+'/?error='+message)
+        }
+        
+    }else{
+        var message = 'something went wrong..!'
+            res.redirect('/eventadmin/?error='+message)
+    }
+
+})
+
+
+//add stall Special
+router.post('/special/:ID',async(req,res)=>{
+    var ex = await exhibitor.findById(req.params.ID)
+    if(ex){
+        var st = new stall({
+            isSpecial:true,
+            package:3,
+            exhibitorID:ex.id,
+            eventID:ex.eventID
+        })
+        try{
+            await st.save()
+            var message = 'special stall added successfully..!'
             res.redirect('/exhibitor/all/'+st.eventID+'/?success='+message)
         }catch(err){
             var message = 'something went wrong check internet connection..!'

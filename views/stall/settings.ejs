@@ -126,11 +126,11 @@
         <hr>
     </div>
     <!-- selections -->
-    <select class="form-select" aria-label="Default select example">
-        <option selected>Open this select menu</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
+    Stall Model
+    <select class="form-select" aria-label="Default select example" name="model">
+        <option value=1 <% if(stall.model==1){ %> selected <% } %>  >One</option>
+        <option value=2 <% if(stall.model==2){ %> selected <% } %>>Two</option>
+        <option value=3<% if(stall.model==3){ %> selected <% } %>>Three</option>
       </select>
       <br>
       <button type="submit" class="btn btn-primary">Update Changes</button>

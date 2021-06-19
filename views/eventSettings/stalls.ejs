@@ -15,8 +15,8 @@
                         <td>
                             <%=stall.name%>
                         </td>
-                        <td>
-                            Package 0<%=stall.package%>
+                        <td><% if(stall.isSpecial){ %>Special<% }else{ %>  
+                            Package 0<%=stall.package%> <% } %> 
                         </td>
                         <td>
                             <form action="/stall/remove/<%=stall.id%>" method="POST">
