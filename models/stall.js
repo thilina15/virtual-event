@@ -10,7 +10,7 @@ const stall = new mongoose.Schema({
     },
     model:{
         type:Number,
-        default:1
+        default:2
     },
     package:{
         type:Number,

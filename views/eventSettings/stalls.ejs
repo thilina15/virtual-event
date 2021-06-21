@@ -6,6 +6,7 @@
               <tr>
                 <th scope="col">Stall Name</th>
                 <th scope="col">Package</th>
+                <th scope="col">Exhibitor</th>
                 <th scope="col"></th>
               </tr>
             </thead>
@@ -17,6 +18,9 @@
                         </td>
                         <td><% if(stall.isSpecial){ %>Special<% }else{ %>  
                             Package 0<%=stall.package%> <% } %> 
+                        </td>
+                        <td>
+                            <%=stall.exhibitorID.name %>  
                         </td>
                         <td>
                             <form action="/stall/remove/<%=stall.id%>" method="POST">

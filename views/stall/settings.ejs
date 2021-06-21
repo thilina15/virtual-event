@@ -1,3 +1,4 @@
+<center><h4>Stall Package <%=stall.package %></h4></center>
 <br>
 
 <form action="/stall/<%=stall.id%>" method="POST" enctype="multipart/form-data">
@@ -63,6 +64,15 @@
                     </center>
                 </div>
             </div><hr>
+            <label class="form-label" for="customFile">Stall Model</label>
+            <select class="form-select" aria-label="Default select example" name="model">
+                <option value=1 <% if(stall.model==1){ %> selected <% } %>  >One</option>
+                <option value=2 <% if(stall.model==2){ %> selected <% } %>>Two</option>
+                <% if(stall.package!=2){ %> 
+                    <option value=3<% if(stall.model==3){ %> selected <% } %>>Three</option>
+                <% } %> 
+            </select>
+            <br> <hr>     
         </div>
         <!-- right collum  ..................................................-->
         <div class="col-md-4"><br>
@@ -84,7 +94,8 @@
             <div class="row">
                 <div class="col-md-8">
                     <label class="form-label" for="customFile">Stall Poster 02</label>
-                    <input type="file" class="form-control" name="poster2">
+                    <small  class="form-text text-muted">for stall package 2 and 3 </small>
+                    <input type="file" class="form-control" name="poster2" <% if(stall.package<2){ %> disabled <% } %>>
                     <small  class="form-text text-muted">recomend scale = 3 x 2 </small>
                 </div>
                 <div class="col-md-4">
@@ -98,13 +109,14 @@
             <div class="row">
                 <div class="col-md-8">
                     <label class="form-label" for="customFile">Stall Poster 03</label>
-                    <input type="file" class="form-control" name="poster3">
-                    <small  class="form-text text-muted">recomend scale = 3 x 2 </small>
+                    <small  class="form-text text-muted">for stall package 3 </small>
+                    <input type="file" class="form-control" name="poster3" <% if(stall.package<3){ %> disabled <% } %>>
+                    <small  class="form-text text-muted">recomend scale = 1 x 1 </small>
                 </div>
                 <div class="col-md-4">
                     <br>
                     <center>
-                        <img src="<%=stall.poster3%>" class="rounded mx-auto d-block" alt="Stall logo" width="120px" height="80px">
+                        <img src="<%=stall.poster3%>" class="rounded mx-auto d-block" alt="Stall logo" width="120px" height="120px">
                     </center>
                 </div>
             </div><hr>
@@ -112,28 +124,20 @@
             <div class="row">
                 <div class="col-md-8">
                     <label class="form-label" for="customFile">Stall Poster 04</label>
-                    <input type="file" class="form-control" name="poster4">
-                    <small  class="form-text text-muted">recomend scale = 3 x 2 </small>
+                    <small  class="form-text text-muted">for stall package 3 </small>
+                    <input type="file" class="form-control" name="poster4" <% if(stall.package<3){ %> disabled <% } %> >
+                    <small  class="form-text text-muted">recomend scale = 1 x 1 </small>
                 </div>
                 <div class="col-md-4">
                     <br>
                     <center>
-                        <img src="<%=stall.poster4%>" class="rounded mx-auto d-block" alt="Stall logo" width="120px" height="80px">
+                        <img src="<%=stall.poster4%>" class="rounded mx-auto d-block" alt="Stall logo" width="120px" height="120px">
                     </center>
                 </div>
             </div><hr>
         </div>
         <hr>
     </div>
-    <!-- selections -->
-    Stall Model
-    <select class="form-select" aria-label="Default select example" name="model">
-        <option value=1 <% if(stall.model==1){ %> selected <% } %>  >One</option>
-        <option value=2 <% if(stall.model==2){ %> selected <% } %>>Two</option>
-        <option value=3<% if(stall.model==3){ %> selected <% } %>>Three</option>
-      </select>
-      <br>
-      <button type="submit" class="btn btn-primary">Update Changes</button>
+    <button type="submit" class="btn btn-primary">Update Changes</button>
   </form>
-
 

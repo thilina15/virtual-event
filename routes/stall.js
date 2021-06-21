@@ -189,7 +189,7 @@ router.post('/:stallID',exhibitorAuth,upload.fields([
 router.get('/all/:eventID',eventAdminAuth,async(req,res)=>{
     try{
         var ob = await event.findById(req.params.eventID)
-        var stalls = await stall.find({eventID:req.params.eventID}).populate('exhibitor')
+        var stalls = await stall.find({eventID:req.params.eventID}).populate('exhibitorID')
         console.log(stalls)
         if(ob){
             res.locals.event=ob
