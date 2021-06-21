@@ -17,7 +17,13 @@ const event = new mongoose.Schema({
     stallPackage01:Number,
     stallPackage02:Number,
     stallPackage03:Number,
-    request:String,
+    request:{
+        name:String,
+        stalls:Number,
+        ads:Number,
+        duration:Number,
+        description:String
+    },
     state:{
         type:String,
         default:'pending'

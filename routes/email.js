@@ -22,8 +22,14 @@ const transpoter = nodeMailer.createTransport({
 //event request
 router.post('/eventrequest',eventAdminAuth,async(req,res)=>{
     var ob = new event({ //this event in pending state
-        request:req.body.description,
+        request:{
+            name:req.body.name,
+            stalls:req.body.stalls,
+            ads:req.body.ads,
+            description:req.body.description
+        },
         name:req.body.name,
+        description:req.body.description,
         eventAdmin: req.session.userObject._id
     })
     //build email body
