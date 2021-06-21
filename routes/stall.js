@@ -21,7 +21,6 @@ const upload = multer({storage:storage})
 
 //add stall package 1
 router.post('/package1/:ID',async(req,res)=>{
-    var ex = await exhibitor.findById(req.params.ID)
     if(ex){
         var st = new stall({
             package:1,
@@ -190,7 +189,8 @@ router.post('/:stallID',exhibitorAuth,upload.fields([
 router.get('/all/:eventID',eventAdminAuth,async(req,res)=>{
     try{
         var ob = await event.findById(req.params.eventID)
-        var stalls = await stall.find({eventID:req.params.eventID})
+        var stalls = await stall.find({eventID:req.params.eventID}).populate('exhibitor')
+        console.log(stalls)
         if(ob){
             res.locals.event=ob
             res.render('eventSettings/stalls',{stalls:stalls})

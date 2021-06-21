@@ -6,12 +6,23 @@
 </center>
 <br><br><hr><br>
 
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta, consectetur est? Quasi, enim ad molestiae voluptatum architecto dignissimos libero voluptas tempora ex suscipit deserunt voluptatibus aliquid sint iste nostrum porro.
 
 <form action="/email/eventRequest" method="POST" >
     <div class="form-group">
-        <label>Event Name</label>
+        <label>Enter the Event Title</label>
         <input type="text" class="form-control"  name="name" placeholder="Enter a name for the event" required>
-      </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 form-group">
+            <label>How many Stalls are you planing to use?</label>
+            <input type="number" class="form-control"  name="stalls" min="1" max="20" placeholder="Enter number of stalls" required>
+        </div>
+        <div class="col-md-6 form-group">
+            <label>How long are you planing to have the Event for?</label>
+            <input type="number" class="form-control"  name="duration" min="1" placeholder="Enter the Event duration (Days)" required>
+        </div>
+    </div>
     <div class="form-group">
         <label >Explain little bit about your Event..</label>
         <textarea class="form-control" rows="8" name="description" required></textarea>

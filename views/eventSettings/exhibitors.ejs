@@ -6,6 +6,8 @@
     <form action=""></form>
 </div>
 <hr>
+<p class="h4">You have <%=6-special %> special stalls left and <%=20-basic %> common stalls left</p>
+
 
 <% if(exhibitors){%>
         <table class="table table-sm table-dark">
@@ -25,25 +27,40 @@
                         <td>
                             <%=exhibitor.name%> - <%=exhibitor.address%>
                         </td>
-                        <td>
-                            <form action="/stall/package1/<%=exhibitor.id%>" method="POST">
-                                <button type="submit">ADD</button>
-                            </form>
+                        <td><% if(basic<20){ %> 
+                                <form action="/stall/package1/<%=exhibitor.id%>" method="POST">
+                                    <button type="submit">ADD</button>
+                                </form>
+                            <% }else{ %>
+                                Full
+                            <% } %>  
                         </td>
                         <td>
-                            <form action="/stall/package2/<%=exhibitor.id%>" method="POST">
-                                <button type="submit">ADD</button>
-                            </form>
+                            <% if(basic<20){ %> 
+                                <form action="/stall/package2/<%=exhibitor.id%>" method="POST">
+                                    <button type="submit">ADD</button>
+                                </form>
+                            <% }else{ %>
+                                Full
+                            <% } %>
                         </td>
                         <td>
-                            <form action="/stall/package3/<%=exhibitor.id%>" method="POST">
-                                <button type="submit">ADD</button>
-                            </form>
+                            <% if(basic<20){ %> 
+                                <form action="/stall/package3/<%=exhibitor.id%>" method="POST">
+                                    <button type="submit">ADD</button>
+                                </form>
+                            <% }else{ %>
+                                Full
+                            <% } %>
                         </td>
                         <td>
-                            <form action="/stall/special/<%=exhibitor.id%>" method="POST">
-                                <button type="submit">ADD</button>
-                            </form>
+                            <% if(special<6){ %>
+                                <form action="/stall/special/<%=exhibitor.id%>" method="POST">
+                                    <button type="submit">ADD</button>
+                                </form>
+                            <% }else{ %>
+                                Full
+                            <% } %>  
                         </td>
                         <td>
                             <form action="/advertise/new/<%=exhibitor.id%>" method="POST">

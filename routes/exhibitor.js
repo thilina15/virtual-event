@@ -19,11 +19,13 @@ router.get('/',exhibitorAuth,async(req,res)=>{
 //view exhibitors for given event
 router.get('/all/:eventID',eventAdminAuth,async(req,res)=>{
     try{
+        var special_Stalls= await stall.find({eventID:req.params.eventID,isSpecial:true})
+        var basic_Stalls = await stall.find({eventID:req.params.eventID,isSpecial:false})
         var ob = await event.findById(req.params.eventID)
         var exhibitors = await exhibitor.find({eventID:req.params.eventID})
         if(ob){
             res.locals.event=ob
-            res.render('eventSettings/exhibitors',{exhibitors:exhibitors})
+            res.render('eventSettings/exhibitors',{exhibitors:exhibitors,special:special_Stalls.length, basic:basic_Stalls.length})
         }else{
             res.send('no event')
         }
