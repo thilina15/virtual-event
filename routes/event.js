@@ -52,7 +52,7 @@ router.get('/deny/:id',adminAuth,async(req,res)=>{
 //visti event
 router.get('/visit/:id',adminAuth,async(req,res)=>{
     try{
-        var ob = await event.findById(req.params.id)
+        var ob = await event.findById(req.params.id).populate('eventAdmin')
         res.status(200).render('eventSettings/visitRequest',{event:ob})
     }catch(err){
         var message = 'something went wrong..!'

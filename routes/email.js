@@ -26,6 +26,7 @@ router.post('/eventrequest',eventAdminAuth,async(req,res)=>{
             name:req.body.name,
             stalls:req.body.stalls,
             ads:req.body.ads,
+            duration:req.body.duration,
             description:req.body.description
         },
         name:req.body.name,

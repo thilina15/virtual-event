@@ -1,1 +1,102 @@
-this is event request details
+<center>
+    <h2>Event Request</h2>
+</center>
+<br>
+<hr>
+<div class="row">
+    <!-- event request details -->
+    <div class="col-md-6">
+        <div class="row">
+            <div class="col-md-7" style="text-align:right;">
+                <h5>Event Title :</h5>
+            </div>
+            <div class="col-md-5">
+                <h6><%=event.request.name%></h6>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-7" style="text-align:right;">
+                <h5>Requested Stalls :</h5>
+            </div>
+            <div class="col-md-5">
+                <h6><%=event.request.stalls%></h6>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-7" style="text-align:right;">
+                <h5>Requested Ads :</h5>
+            </div>
+            <div class="col-md-5">
+                <h6><%=event.request.ads%></h6>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-7" style="text-align:right;">
+                <h5>Event Duration :</h5>
+            </div>
+            <div class="col-md-5">
+                <h6><%=event.request.duration%> Days</h6>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-7" style="text-align:right;">
+                <h5>Description :</h5>
+            </div>
+            <div class="col-md-5">
+                <h6><%=event.request.description%></h6>
+            </div>
+        </div>
+    </div>
+    <!-- event admin details -->
+    <div class="col-md-6">
+        <div class="row">
+            <div class="col-md-5" style="text-align:right;">
+                <h5>Name :</h5>
+            </div>
+            <div class="col-md-7">
+                <h6><%=event.eventAdmin.name%></h6>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-5" style="text-align:right;">
+                <h5>Address :</h5>
+            </div>
+            <div class="col-md-7">
+                <h6><%=event.eventAdmin.address%></h6>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-5" style="text-align:right;">
+                <h5>Email :</h5>
+            </div>
+            <div class="col-md-7">
+                <h6><%=event.eventAdmin.email%></h6>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-5" style="text-align:right;">
+                <h5>Mobile :</h5>
+            </div>
+            <div class="col-md-7">
+                <h6><%=event.eventAdmin.mobile%></h6>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-6" style="text-align:right;">
+                <a href="/event/approve/<%=event.id%>" class="btn btn-success" role="button">Approve Request</a>
+            </div>
+            <div class="col-md-6">
+                <a href="/event/deny/<%=event.id%>" class="btn btn-danger" role="button">Deny Request</a>
+            </div>
+        </div>
+    </div>
+
+</div>
