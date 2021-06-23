@@ -1,0 +1,30 @@
+
+
+
+<ul class="nav">
+    <li class="nav-item">
+        <a href="/stall/<%=content.stallID%>" class="nav-link">Stall</a>
+    </li>
+    <li class="nav-item">
+        <a href="/content/all/<%=content.stallID%>" class="nav-link">contents</a>
+    </li>
+</ul>
+<br>
+
+<form action="/content/<%=content.id%>" method="POST" enctype="multipart/form-data">
+
+tittle
+<input type="text" name="tittle" value="<%=content.tittle%>">
+
+description
+<textarea name="description" id="" cols="30" rows="10">
+    <%=content.description%> 
+</textarea>
+
+image
+<img src="<%=content.image%>" alt="content image">
+<input type="file" name="image">
+
+<button type="submit">Update Content</button>
+
+</form>

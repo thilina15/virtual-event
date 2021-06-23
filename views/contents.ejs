@@ -1,0 +1,50 @@
+
+<ul class="nav">
+    <li class="nav-item">
+        <a href="/stall/<%=stallID%>" class="nav-link">Stall</a>
+    </li>
+    <li class="nav-item">
+        <a href="/content/new/<%=stallID%>" class="nav-link"> add new content </a>
+    </li>
+</ul>
+<br>
+
+<div class="row">
+    <!-- content table side -->
+    <div class="col-md-6">
+        <% if(contents){%>
+            <table class="table table-sm table-dark">
+                <thead>
+                  <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Tittle</th>
+                    <th scope="col">Image</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <% contents.forEach((content,i)=>{%>
+                        <tr>
+                            <td>
+                                <%=i+1%> 
+                            </td>
+                            <td>
+                                <%=content.tittle%>  
+                            </td>
+                            <td>
+                                <img src="<%=content.image%>" alt="content image" class="rounded mx-auto d-block" width="60px" height="40px">  
+                            </td>
+                            <td>
+                                <a href="/content/<%=content.id%>">View</a>
+                            </td>
+                        </tr>
+                    <%}) %>   
+                </tbody>
+              </table>
+    <%}%> 
+    </div>
+    <!-- selected content update side -->
+    <div class="col-md-6">
+
+    </div>
+</div>

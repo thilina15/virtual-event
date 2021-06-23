@@ -24,6 +24,7 @@ const logOutRoute = require('./routes/logOut')
 const email = require('./routes/email')
 const stall = require('./routes/stall')
 const advertise = require('./routes/advertise')
+const content = require('./routes/content')
 const unreal = require('./routes/unreal')
 
 //app config
@@ -75,6 +76,7 @@ app.use('/logout',logOutRoute)
 app.use('/email',email)
 app.use('/stall',stall)
 app.use('/advertise',advertise)
+app.use('/content',content)
 app.use('/unreal',unreal)
 
 app.listen(process.env.PORT||3000)
