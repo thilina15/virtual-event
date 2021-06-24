@@ -31,7 +31,10 @@ router.get('/all/:stallID',exhibitorAuth,async(req,res)=>{
 //view only one content
 router.get('/:contentID',exhibitorAuth,async(req,res)=>{
     var ob = await content.findById(req.params.contentID)
-    res.render('contentView',{content:ob})
+    var st = await stall.findById(ob.stallID)
+    var contents = await content.find({stallID:st.id})
+    res.locals.content=ob
+    res.render('contents',{stallID:st.id,contents:contents})
 })
 
 //update content
@@ -50,8 +53,14 @@ router.post('/:contentID',upload.single('image'),async(req,res)=>{
 })
 
 //add new content view
-router.get('/new/:stallID',exhibitorAuth,(req,res)=>{
-    res.render('contentNew',{stallID:req.params.stallID})
+router.get('/new/:stallID',exhibitorAuth,async(req,res)=>{
+    var ob = await content.find({stallID:req.params.stallID})
+    if(ob){
+        res.render('contents',{contents:ob , stallID:req.params.stallID})
+    }else{
+        res.render('contents',{stallID:req.params.stallID})
+    }
+    res.render('contents',{stallID:req.params.stallID})
 })
 
 //add a new content

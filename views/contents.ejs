@@ -4,7 +4,7 @@
         <a href="/stall/<%=stallID%>" class="nav-link">Stall</a>
     </li>
     <li class="nav-item">
-        <a href="/content/new/<%=stallID%>" class="nav-link"> add new content </a>
+        <a href="/content/all/<%=stallID%>" class="nav-link"> add new content </a>
     </li>
 </ul>
 <br>
@@ -45,6 +45,10 @@
     </div>
     <!-- selected content update side -->
     <div class="col-md-6">
-
+        <%if(locals.content){ %>
+            <%- include('contentView') %> 
+        <% }else{ %>
+            <%- include('contentNew') %>
+        <% } %>  
     </div>
 </div>
