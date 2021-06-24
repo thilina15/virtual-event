@@ -7,6 +7,7 @@ const exhibitorAuth = require('../auth/userAuth').exhibitor
 const event = require('../models/event')
 const exhibitor = require('../models/exhibitor')
 const stall = require('../models/stall')
+const content = require('../models/content')
 
 //file upload setup
 const multer = require('multer')
@@ -204,6 +205,7 @@ router.get('/all/:eventID',eventAdminAuth,async(req,res)=>{
 
 //remove stall
 router.post('/remove/:stallID',eventAdminAuth,async(req,res)=>{
+        await content.remove({stallID:req.params.stallID})
     try{
         var stallObject = await stall.findById(req.params.stallID)
         var event = stallObject.eventID

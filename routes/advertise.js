@@ -59,7 +59,7 @@ router.get('/all/:eventID',eventAdminAuth,async(req,res)=>{
     }
 })
 
-//remove stall
+//remove ad
 router.post('/remove/:adID',eventAdminAuth,async(req,res)=>{
     try{
         var adObject = await advertise.findById(req.params.adID)
@@ -79,5 +79,25 @@ router.get('/:ID',exhibitorAuth,async(req,res)=>{
     res.render('advertiseSettings',({ad:ad}))
 })
 
+//update ad
+router.post('/:ID',upload.single('image'),async(req,res)=>{
+    var ob = await advertise.findById(req.params.ID)
+    if(req.file){
+        ob.image = '/' + req.file.destination + req.file.filename
+    }
+    ob.headline = req.body.headline
+    ob.description = req.body.description
+
+    try{
+        await ob.save()
+        const message= 'advertising space updated successfully..!'
+        res.redirect('/advertise/'+req.params.ID+'/?success='+message)
+    }catch(er){
+        const message= 'something went wrong.. check your connection'
+        res.redirect('/advertise/'+req.params.ID+'/?error='+message)
+    }
+    
+    
+})
 
 module.exports = router

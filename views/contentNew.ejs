@@ -1,17 +1,21 @@
 
 
 <form action="/content/new/<%=stallID%>" method="POST" enctype="multipart/form-data">
+    <div class="col-md-11">
+        <div class="form-group">
+            <label>Title</label>
+            <input type="text" name="tittle" class="form-control">
+        </div>
+        <div class="form-group">
+            <label>Description</label>
+            <textarea name="description"  rows="4" class="form-control"></textarea>
+        </div>
+        <div class="form-group">
+            <label>Image</label>
+            <input type="file" name="image" class="form-control">
+        </div>
+    </div>
+    <br>
+    <button type="submit" class="btn btn-primary">Add Content</button>
+</form>
 
-    tittle
-    <input type="text" name="tittle" >
-    
-    description
-    <textarea name="description" id="" cols="30" rows="10">
-    </textarea>
-    
-    image
-    <input type="file" name="image">
-    
-    <button type="submit">Add Content</button>
-    
-    </form>
