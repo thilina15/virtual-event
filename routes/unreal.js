@@ -4,6 +4,7 @@ const router = express.Router()
 
 const event = require('../models/event')
 const stall = require('../models/stall')
+const content = require('../models/content')
 
 
 
@@ -19,7 +20,7 @@ router.post('/events',(req,res)=>{
     res.json({image:req.body.image})
 })
 
-
+//get all stalls for given event ID
 router.get('/stalls/:eventID',async(req,res)=>{
     var stalls = await stall.find({eventID:req.params.eventID})
     ob = {
@@ -29,7 +30,15 @@ router.get('/stalls/:eventID',async(req,res)=>{
     res.json(ob)
 })
 
-
+//get all contents for given stall ID
+router.get('/contents/:stallID',async(req,res)=>{
+    var contents = await content.find({eventID:req.params.eventID})
+    ob = {
+        contents:contents
+    }
+    console.log(ob);
+    res.json(ob)
+})
 
 
 
