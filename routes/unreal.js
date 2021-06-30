@@ -32,7 +32,7 @@ router.get('/stalls/:eventID',async(req,res)=>{
 
 //get all contents for given stall ID
 router.get('/contents/:stallID',async(req,res)=>{
-    var contents = await content.find({eventID:req.params.eventID})
+    var contents = await content.find({stallID:req.params.stallID})
     ob = {
         contents:contents
     }
