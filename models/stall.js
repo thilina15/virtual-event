@@ -46,6 +46,14 @@ const stall = new mongoose.Schema({
     visitedEmails:[
         {type:String}
     ],
+    visits:[{
+        count:{type:Number, default:0},
+        duration:{type:Number, default:0},
+        date:{
+            type:Date,
+            default:Date.now()
+        }
+    }],
     exhibitorID:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'Exhibitor'
