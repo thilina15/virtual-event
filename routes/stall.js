@@ -123,7 +123,6 @@ router.post('/special/:ID',async(req,res)=>{
 
 //stall settings
 router.get('/:stallID',exhibitorAuth,async(req,res)=>{
-    console.log(req.params.stallID)
     var ob = await stall.findById(req.params.stallID)
     if(ob){
         res.render('stall/settings',{stall:ob})
@@ -218,5 +217,19 @@ router.post('/remove/:stallID',eventAdminAuth,async(req,res)=>{
     }
 })
 
+
+//stall report
+router.get('/report/:stallID',async(req,res)=>{
+    var ob = await stall.findById(req.params.stallID)
+    var days =[]
+    var visits = []
+    var duration = []
+    ob.visits.forEach(visit => {
+        visits.push(visit.count)
+        days.push(visit.date)
+        duration.push(visit.duration)
+    });
+    res.render('reports/stallReport',{stall:ob, labels:days, visitCount: visits, visitDuration:duration, sample:ob.visits})
+})
 
 module.exports = router
