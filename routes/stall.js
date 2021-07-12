@@ -221,15 +221,21 @@ router.post('/remove/:stallID',eventAdminAuth,async(req,res)=>{
 //stall report
 router.get('/report/:stallID',async(req,res)=>{
     var ob = await stall.findById(req.params.stallID)
-    var days =[]
-    var visits = []
-    var duration = []
+    var visitsOB = []
+    var totalVisit=0;
+    var totalDuration=0;
     ob.visits.forEach(visit => {
-        visits.push(visit.count)
-        days.push(visit.date)
-        duration.push(visit.duration)
+        const date = new Date(visit.date).toLocaleDateString()
+        visit.date="asd"
+        visitsOB.push({
+            count:visit.count,
+            duration:visit.duration,
+            date:date
+        })
+        totalVisit+=visit.count
+        totalDuration+=visit.duration
     });
-    res.render('reports/stallReport',{stall:ob, labels:days, visitCount: visits, visitDuration:duration, sample:ob.visits})
+    res.render('reports/stallReport',{stall:ob, sample:visitsOB, visitCount:totalVisit, visitDuration:totalDuration})
 })
 
 module.exports = router
