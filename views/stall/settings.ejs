@@ -29,7 +29,7 @@
                 <input type="text" class="form-control" name="webSite" value="<%=stall.webSite%>">
             </div><br>
             <div class="form-group">
-                <label>Stream Link (youtube)</label>
+                <label>YouTube Channel Link</label>
                 <input type="text" class="form-control" name="streamLink" value="<%=stall.streamLink%>">
             </div><hr>
         </div>
@@ -84,7 +84,16 @@
                     <option value=3<% if(stall.model==3){ %> selected <% } %>>Three</option>
                 <% } %> 
             </select>
-            <br> <hr>     
+            <hr>
+            <label class="form-label" for="customFile">Stall Character</label>
+            <select class="form-select" aria-label="Default select example" name="characterType">
+                <option value=0 <% if(stall.characterType==0){ %> selected <% } %> >Black Office Lady</option>
+                <option value=1 <% if(stall.characterType==1){ %> selected <% } %> >White Office Lady</option>
+                <option value=2 <% if(stall.characterType==2){ %> selected <% } %> >White Office Man</option>
+                <option value=3 <% if(stall.characterType==3){ %> selected <% } %> >Casual Man 1</option>
+                <option value=4 <% if(stall.characterType==4){ %> selected <% } %> >Casual Man 2</option>
+                <option value=5 <% if(stall.characterType==5){ %> selected <% } %> >Casual Lady</option>
+            </select>     
         </div>
         <!-- right collum  ..................................................-->
         <div class="col-md-4"><br>

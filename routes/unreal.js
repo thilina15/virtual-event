@@ -10,7 +10,7 @@ const ad = require('../models/advertise')
 
 
 router.get('/events',async(req,res)=>{
-    var ev = await event.find({state:"active"})
+    var ev = await event.find({state:"active"}).populate('eventAdmin')
     ob={
         events:ev
     }
