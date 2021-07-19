@@ -80,5 +80,12 @@ router.post('/new/:stallID',upload.single('image'),async(req,res)=>{
     res.redirect('/content/all/'+req.params.stallID+'/?success='+message)
 })
 
+//remove content
+router.post('/remove/:contentID',async(req,res)=>{
+    await content.findByIdAndRemove(req.params.contentID)
+    var message = 'content deleted successfully..!'
+    res.redirect('/content/all/'+req.body.stallID+'/?success='+message)
+
+})
 
 module.exports = router

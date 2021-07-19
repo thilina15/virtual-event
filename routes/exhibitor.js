@@ -86,4 +86,22 @@ router.get('/account',exhibitorAuth,async(req,res)=>{
     
 })
 
+router.post('/remove/:exhibitorID',eventAdminAuth,async(req,res)=>{
+    
+    try{
+        //remove advertising spaces belongs to exhibitor
+        await advertise.deleteMany({exhibitorID:req.params.exhibitorID})
+        //remove stalls belongs to exhibitor
+        await stall.deleteMany({exhibitorID:req.params.exhibitorID})
+        //remove exhibitor
+        await exhibitor.findByIdAndRemove(req.params.exhibitorID)
+        var message ='exhibitor deleted successfully..'
+        res.redirect('/exhibitor/all/'+req.body.eventID+'/?success='+message)
+    }catch(e){
+        var message ='unable to delete the exhibitor.. check the connection..'
+        res.redirect('/exhibitor/all/'+req.body.eventID+'/?error='+message)
+    }
+    
+    
+})
 module.exports = router

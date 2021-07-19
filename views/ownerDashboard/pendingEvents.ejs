@@ -8,7 +8,7 @@
 
 
 
-<table class="table table-sm table-dark">
+<table class="table table-sm table-dark" style="text-align: center;">
     <thead>
       <tr>
         <th scope="col">Admin Name</th>
@@ -26,9 +26,23 @@
                     <%=event.name%>
                 </td>
                 <td>
-                    <a href="/event/approve/<%=event.id%>">active</a>
-                    <a href="/event/deny/<%=event.id%>">delete</a>
-                    <a href="/event/visit/<%=event.id%>">visit</a>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <form action="/event/approve/<%=event.id%>" method="GET">
+                                <button type="submit" class="btn btn-success"> Active</button>
+                            </form>
+                        </div>
+                        <div class="col-md-4">
+                            <form action="/event/deny/<%=event.id%>" method="GET">
+                                <button type="submit" class="btn btn-danger"> Delete</button>
+                            </form>
+                        </div>
+                        <div class="col-md-4">
+                            <form action="/event/visit/<%=event.id%>" method="GET">
+                                <button type="submit" class="btn btn-info"> Visit</button>
+                            </form>
+                        </div>
+                    </div>
                 </td>
             </tr>
         <%}) %>   

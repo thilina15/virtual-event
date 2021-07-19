@@ -18,7 +18,16 @@
                 <textarea name="description"  rows="4" class="form-control"><%=ad.description%></textarea>
             </div>
             <br>
-            <button type="submit" class="btn btn-primary">Update Ad</button>
+            <div class="row">
+                <div class="col-md-4">
+                    <button type="submit" class="btn btn-primary">Update Ad</button>
+                </div>
+                <div class="col-md-4">
+                    <a href="/advertise/remove/<%=ad.id%>"> <h5>Remove Ad</h5> </a>
+                </div>
+            </div>
+            
+            
         </div>
     </div>
     

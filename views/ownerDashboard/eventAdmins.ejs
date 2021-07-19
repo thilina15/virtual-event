@@ -26,7 +26,9 @@
                     <%=eventAdmin.address%>
                 </td>
                 <td>
-                    <a href="/event/new/<%=eventAdmin.id%>">add event</a>
+                    <form action="/event/new/<%=eventAdmin.id%>" method="GET">
+                    <button type="submit" class="btn btn-info"> Add Event</button>
+                    </form>
                 </td>
             </tr>
         <%}) %>   

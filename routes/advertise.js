@@ -59,7 +59,21 @@ router.get('/all/:eventID',eventAdminAuth,async(req,res)=>{
     }
 })
 
-//remove ad
+//remove ad from exhibitor
+router.get('/remove/:adID',exhibitorAuth,async(req,res)=>{
+    var message =''
+    try{
+        await advertise.findByIdAndRemove(req.params.adID)
+        message = 'advertise deleted successfully..!'
+        res.redirect('/exhibitor/?success='+message)
+    }catch(e){
+        message = "something went wrong.. advertise couldn't delete..!"
+        res.redirect('/exhibitor/?error='+message)
+    }
+ 
+})
+
+//remove ad from admin
 router.post('/remove/:adID',eventAdminAuth,async(req,res)=>{
     try{
         var adObject = await advertise.findById(req.params.adID)
