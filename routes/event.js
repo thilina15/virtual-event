@@ -9,6 +9,9 @@ const event = require('../models/event')
 const eventAdmin = require('../models/eventAdmin')
 const adminAuth = require('../auth/userAuth').systemAdmin
 const eventAdminAuth = require('../auth/userAuth').eventAdmin
+const stall = require('../models/stall')
+const advertise = require('../models/advertise')
+const exhibitor = require('../models/exhibitor')
 
 //image upload system
 const multer = require('multer')
@@ -137,7 +140,37 @@ router.post('/settings/:eventID',eventAdminAuth,upload.single('image'),async(req
     }
 })
 
+//show event summary
+router.get('/summary/:eventID',async(req,res)=>{
+    var eventOB = await event.findById(req.params.eventID).populate('eventAdmin')
+    var stallOBs = await stall.find({eventID:req.params.eventID})
+    var adOBs = await advertise.find({eventID:req.params.eventID})
+    var exhibitorOBs = await exhibitor.find({eventID:req.params.eventID})
 
+    var stalls = []
+    var emails = []
+    stallOBs.forEach(stall => {
+        //save visited emails
+        stall.visitedEmails.forEach(email=>{
+            if(!emails.includes(email)){
+                emails.push(email)
+            }
+        })
+        //save visited count and duration
+        var count=0
+        var duration=0
+        stall.visits.forEach(visit=>{
+            count+=visit.count
+            duration+=visit.duration
+        })
+        stalls.push({
+            stall:stall.name,
+            visitCount:count,
+            visitDuration:duration
+        })
+    });
+    res.render('ownerDashboard/eventSummary',{stalls:stalls , event:eventOB ,exhibitors:exhibitorOBs , ads:adOBs , emails:emails})
+})
 
 
 module.exports = router

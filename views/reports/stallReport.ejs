@@ -10,19 +10,41 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-stall report page
+
 <div class="container row">
     <div class="col-md-6">
         <canvas id="myChart" width="100" height="100"></canvas>
     </div>
     <div class="col-md-6">
-        total visits : <%=visitCount %><br>
-        total visit duration : <%=visitDuration %> 
-        <br>
-        visited Emails: <% stall.visitedEmails.forEach(email=>{%>
-                <%=email %> 
-                <br>
-        <%}) %> 
+        <h3><center> <b>Stall Summary</b> </center></h3>
+        <br><br>
+        <div class="row">
+            <div class="col-md-6">
+                <h4 style="text-align: right;">Total Visits :-</h4>
+            </div>
+            <div class="col-md-6">
+                <h5><%=visitCount %></h5>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <h4 style="text-align: right;">Total Visit Duration :-</h4>
+            </div>
+            <div class="col-md-6">
+                <h5><%=visitDuration %> Seconds</h5>
+            </div>
+        </div>
+        <br><hr>
+        <div class="row">
+            <div class="col-md-6">
+                <h4 style="text-align: right;">Visited Emails :-</h4>
+            </div>
+            <div class="col-md-6">
+                <% stall.visitedEmails.forEach(email=>{%>
+                    <h5><i><%=email %></i></h5>
+                <%}) %> 
+            </div>
+        </div>
     </div>
     
 </div>

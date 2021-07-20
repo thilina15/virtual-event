@@ -1,0 +1,145 @@
+
+<br>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<center><h1><b>Event Summary: <i><%=event.name%></i></b></h1></center>
+<br><br><hr><br> 
+<div class="row">
+    <!-- event details -->
+    <div class="col-md-6">
+        <!-- event name -->
+        <div class="row">
+            <div class="col-md-6">
+                <h5 style="text-align: right;"> <b>Event Name :</b></h5>
+            </div>
+            <div class="col-md-6">
+                <h5 ><b><%=event.name%></b></h5>
+            </div>
+        </div>
+        <!-- event description -->
+        <div class="row">
+            <div class="col-md-6">
+                <h5 style="text-align: right;"> <b>Event Description :</b></h5>
+            </div>
+            <div class="col-md-6">
+                <h5 ><i><%=event.description%></i></h5>
+            </div>
+        </div>
+        <!-- number of exhibitors -->
+        <div class="row">
+            <div class="col-md-6">
+                <h5 style="text-align: right;"> <b>Number of Exhibitors :</b></h5>
+            </div>
+            <div class="col-md-6">
+                <h5 ><i><%=exhibitors.length%></i></h5>
+            </div>
+        </div>   
+        <!-- number of stalls -->
+        <div class="row">
+            <div class="col-md-6">
+                <h5 style="text-align: right;"> <b>Number of Stalls :</b></h5>
+            </div>
+            <div class="col-md-6">
+                <h5 ><i><%=stalls.length%></i></h5>
+            </div>
+        </div>  
+        <!-- number of advertises -->  
+        <div class="row">
+            <div class="col-md-6">
+                <h5 style="text-align: right;"> <b>Number of Advertisements :</b></h5>
+            </div>
+            <div class="col-md-6">
+                <h5 ><i><%=ads.length%></i></h5>
+            </div>
+        </div>   
+    </div>
+    <!-- event admin details -->
+    <div class="col-md-6">
+        <H4 style="text-align: center;"><b>Event Admin Details</b></H4> <br>
+        <!-- event admin name -->
+        <div class="row">
+            <div class="col-md-6">
+                <h5 style="text-align: right;"> <b>Name :</b></h5>
+            </div>
+            <div class="col-md-6">
+                <h5 ><b><%=event.eventAdmin.name%></b></h5>
+            </div>
+        </div>
+        <!-- event admin address -->
+        <div class="row">
+            <div class="col-md-6">
+                <h5 style="text-align: right;"> <b>Address :</b></h5>
+            </div>
+            <div class="col-md-6">
+                <h5 ><i><%=event.eventAdmin.address%></i></h5>
+            </div>
+        </div>
+        <!-- event admin email -->
+        <div class="row">
+            <div class="col-md-6">
+                <h5 style="text-align: right;"> <b>Email :</b></h5>
+            </div>
+            <div class="col-md-6">
+                <h5 ><i><%=event.eventAdmin.email%></i></h5>
+            </div>
+        </div>
+        <!-- event admin mobile -->
+        <div class="row">
+            <div class="col-md-6">
+                <h5 style="text-align: right;"> <b>Mobile :</b></h5>
+            </div>
+            <div class="col-md-6">
+                <h5 ><i><%=event.eventAdmin.mobile%></i></h5>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<!-- visited Emails -->
+<h5 style="text-align: center;"><b><u>Visited Emails for Stalls</u></b></h5>
+
+<div class="row">
+    <% emails.forEach((email,index)=>{%>
+        <div class="col-md-4"   <% if(index%3==0){%> style="text-align: right;" <% }else if((index-1)%3==0) {%> style="text-align: center;" <% } %> >
+            <h6><i><%=email%></i></h6> 
+        </div>
+    <%}) %> 
+</div>
+<br><br>
+
+
+<h4 style="text-align: center;"><b>Stalls Summary</b></h4>
+<canvas id="myChart" width="100" height="100"></canvas>
+
+
+<script>
+var ctx = document.getElementById('myChart').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        datasets: [
+            {
+                label: 'number of Visits',
+                data: <%- JSON.stringify(stalls); %>,
+                backgroundColor:['rgba(71, 225, 24, 1)'],
+                parsing:{
+                    yAxisKey: 'visitCount'
+                },
+            },
+            {
+                label: 'duration of Visits in seconds',
+                data: <%- JSON.stringify(stalls); %>,
+                backgroundColor:['rgba(41, 54, 37, 1)'],
+                parsing:{
+                    yAxisKey: 'visitDuration'
+                },
+            }
+        ]
+    },
+    options: {
+        parsing:{
+            xAxisKey: 'stall'
+        }
+    }
+});
+</script>
