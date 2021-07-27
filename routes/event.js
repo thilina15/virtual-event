@@ -15,13 +15,12 @@ const exhibitor = require('../models/exhibitor')
 
 //image upload system
 const multer = require('multer')
-const aws = require('aws-sdk')
-const s3 = new aws.S3({
-    accessKeyId:process.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey:process.env.AWS_SECRET_ACCESS_KEY
+const storage = multer.diskStorage({
+    destination:'public/uploads/',
+    filename:(req,file,cb)=>{
+        cb(null,Date.now()+file.originalname)
+    }
 })
-const bucketName = process.env.AWS_BUCKET_NAME
-const storage = multer.memoryStorage()
 const upload = multer({storage:storage})
 
 
@@ -116,20 +115,9 @@ router.post('/settings/:eventID',eventAdminAuth,upload.single('image'),async(req
             ob.stallPackage03 = req.body.p3
             if(req.file){
                 console.log('file is here')
-                const params = {
-                    Bucket:bucketName,
-                    Key:Date.now()+req.file.originalname,
-                    Body:req.file.buffer
-                }
-                s3.upload(params,async function(err,data){
-                    if(err){
-                        throw err
-                    }
-                    console.log(`1 File uploaded successfully. ${data.Location}`);
-                    ob.notice = data.Location
+                    ob.notice =  '/' + req.file.destination + req.file.filename
                     await ob.save()//save with image  
                     res.redirect('/event/'+req.params.eventID)
-                })
             }else{
                 await ob.save() //saving without image
                 res.redirect('/event/'+req.params.eventID)

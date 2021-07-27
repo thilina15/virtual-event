@@ -1,47 +1,50 @@
-
-<form action="/event/settings/<%=locals.event._id %>" method="POST" enctype="multipart/form-data">
-    <div class="form-group">
-      <label >Name</label>
-      <input type="text" class="form-control" value="<%=locals.event.name %>" name="name">
-    </div>
-    <div class="form-group">
-        <label >Description</label>
-        <textarea class="form-control" rows="5" name="description"><%=locals.event.description %></textarea>
-    </div>
-
-    <div class="form-group">
-      <label for="exampleFormControlSelect1">Layout</label>
-      <select class="form-control" name="layout">
-        <option value="1">Layout 1</option>
-        <option value="2">Layout 2</option>
-        <option value="3">Layout 3</option>
-      </select>
-    </div>
-    <div class="row">
-        <div class="form-group col">
-            <label >Stall Package 1 Price</label>
-            <input type="number" class="form-control" name="p1" value="<%=locals.event.stallPackage01 %>">
+<div class="container">
+    <form action="/event/settings/<%=locals.event._id %>" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+          <label >Name</label>
+          <input type="text" class="form-control" value="<%=locals.event.name %>" name="name">
         </div>
-        <div class="form-group col">
-            <label >Stall Package 2 Price</label>
-            <input type="number" class="form-control" name="p2" value="<%=locals.event.stallPackage02 %>">
+        <div class="form-group">
+            <label >Description</label>
+            <textarea class="form-control" rows="5" name="description"><%=locals.event.description %></textarea>
         </div>
-        <div class="form-group col">
-            <label >Stall Package 3 Price</label>
-            <input type="number" class="form-control" name="p3" value="<%=locals.event.stallPackage03 %>">
+    
+        <div class="form-group">
+          <label for="exampleFormControlSelect1">Layout</label>
+          <select class="form-control" name="layout">
+            <option value="1" <% if(locals.event.layout==1){ %> selected<% } %> >Layout 1</option>
+            <option value="2" <% if(locals.event.layout==2){ %> selected<% } %> >Layout 2</option>
+            <option value="3" <% if(locals.event.layout==3){ %> selected<% } %> >Layout 3</option>
+            <option value="4" <% if(locals.event.layout==4){ %> selected<% } %> >Layout 4</option>
+            <option value="5" <% if(locals.event.layout==5){ %> selected<% } %> >Layout 5</option>
+          </select>
         </div>
-    </div>
-    <br><br>
-    <img src="<%=locals.event.notice %>" class="rounded mx-auto d-block" alt="Event Notice Board Image" width="600px" height="400px">
+        <div class="row">
+            <div class="form-group col">
+                <label >Stall Package 1 Price</label>
+                <input type="number" class="form-control" name="p1" value="<%=locals.event.stallPackage01 %>">
+            </div>
+            <div class="form-group col">
+                <label >Stall Package 2 Price</label>
+                <input type="number" class="form-control" name="p2" value="<%=locals.event.stallPackage02 %>">
+            </div>
+            <div class="form-group col">
+                <label >Stall Package 3 Price</label>
+                <input type="number" class="form-control" name="p3" value="<%=locals.event.stallPackage03 %>">
+            </div>
+        </div>
+        <br><br>
+        <img src="<%=locals.event.notice %>" class="rounded mx-auto d-block" alt="Event Notice Board Image" width="600px" height="400px">
+        
+        <div class="form-group">
+            <label class="form-label" for="customFile">Add New Notice Board Image</label>
+            <input type="file" class="form-control" name="image">
+        </div>
+        
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary">Apply Changes</button>
+        </div>
+        
     
-    <div class="form-group">
-        <label class="form-label" for="customFile">Add New Notice Board Image</label>
-        <input type="file" class="form-control" name="image">
-    </div>
-    
-    <div class="form-group">
-        <button type="submit" class="btn btn-primary">Apply Changes</button>
-    </div>
-    
-
-</form>
+    </form>
+</div>

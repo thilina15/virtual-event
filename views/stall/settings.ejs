@@ -1,164 +1,168 @@
 
-
-<ul class="nav">
-    <li class="nav-item">
-        <a href="/stall/report/<%=stall.id%>" class="nav-link"> reports </a>
-    </li>
-    <li class="nav-item">
-        <a href="/content/all/<%=stall.id%>" class="nav-link"> contents </a>
-    </li>
-</ul>
-<br>
-
-<center><h4>Stall Package <%=stall.package %></h4></center>
-<br>
-
-<form action="/stall/<%=stall.id%>" method="POST" enctype="multipart/form-data">
-    <div class="row">
-        <div class="col-md-4"><br>
-            <div class="form-group">
-                <label>Stall Name</label>
-                <input type="text" class="form-control" name="name" value="<%=stall.name%>">
-            </div><br>
-            <div class="form-group">
-                <label>Description</label>
-                <textarea name="description" class="col-md-12" cols="30" rows="9"><%=stall.description%></textarea>
-            </div><br>
-            <div class="form-group">
-                <label>Website Link</label>
-                <input type="text" class="form-control" name="webSite" value="<%=stall.webSite%>">
-            </div><br>
-            <div class="form-group">
-                <label>YouTube Channel Link</label>
-                <input type="text" class="form-control" name="streamLink" value="<%=stall.streamLink%>">
-            </div><hr>
-        </div>
-        <!-- middle collum images .....................................-->
-        <div class="col-md-4"><br>
-            <!-- logo image -->
-            <div class="row">
-                <div class="col-md-8">
-                    <label class="form-label" for="customFile">Stall Logo Image</label>
-                    <input type="file" class="form-control" name="logoImage">
-                    <small  class="form-text text-muted">recomend scale = 1 x 1 </small>
-                </div>
-                <div class="col-md-4">
-                    <br>
-                    <center>
-                        <img src="<%=stall.logoImage%>" class="rounded mx-auto d-block" alt="Stall logo" width="80px" height="80px">
-                    </center>
-                </div>
-            </div><hr>
-            <!-- name image -->
-            <div class="row">
-                <div class="col-md-8">
-                    <label class="form-label" for="customFile">Stall Name Image</label>
-                    <input type="file" class="form-control" name="nameImage">
-                    <small  class="form-text text-muted">recomend scale = 1 x 6 </small>
+<div class="container">
+    <ul class="nav">
+        <li class="nav-item">
+            <a href="/stall/report/<%=stall.id%>" class="nav-link"> reports </a>
+        </li>
+        <li class="nav-item">
+            <a href="/content/all/<%=stall.id%>" class="nav-link"> contents </a>
+        </li>
+    </ul>
+    <br>
+    
+    <center><h4>Stall Package <%=stall.package %></h4></center>
+    <br>
+    
+    <form action="/stall/<%=stall.id%>" method="POST" enctype="multipart/form-data">
+        <div class="row">
+            <div class="col-md-4"><br>
+                <div class="form-group">
+                    <label>Stall Name</label>
+                    <input type="text" class="form-control" name="name" value="<%=stall.name%>">
                 </div><br>
-                <center>
-                    <img src="<%=stall.nameImage%>" class="rounded mx-auto d-block" alt="Stall logo" width="300px" height="50px">
-                </center>  
-            </div><hr>
-            
-            
-            <!-- QR image -->
-            <div class="row">
-                <div class="col-md-8">
-                    <label class="form-label" for="customFile">QR Code Image</label>
-                    <input type="file" class="form-control" name="QRcode">
-                    <small  class="form-text text-muted">recomend scale = 1 x 1 </small>
-                </div>
-                <div class="col-md-4">
-                    <br>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea name="description" class="col-md-12" cols="30" rows="9"><%=stall.description%></textarea>
+                </div><br>
+                <div class="form-group">
+                    <label>Website Link</label>
+                    <input type="text" class="form-control" name="webSite" value="<%=stall.webSite%>">
+                </div><br>
+                <div class="form-group">
+                    <label>YouTube Channel Link</label>
+                    <input type="text" class="form-control" name="streamLink" value="<%=stall.streamLink%>">
+                </div><hr>
+            </div>
+            <!-- middle collum images .....................................-->
+            <div class="col-md-4"><br>
+                <!-- logo image -->
+                <div class="row">
+                    <div class="col-md-8">
+                        <label class="form-label" for="customFile">Stall Logo Image</label>
+                        <input type="file" class="form-control" name="logoImage">
+                        <small  class="form-text text-muted">recomend scale = 1 x 1 </small>
+                    </div>
+                    <div class="col-md-4">
+                        <br>
+                        <center>
+                            <img src="<%=stall.logoImage%>" class="rounded mx-auto d-block" alt="Stall logo" width="80px" height="80px">
+                        </center>
+                    </div>
+                </div><hr>
+                <!-- name image -->
+                <div class="row">
+                    <div class="col-md-8">
+                        <label class="form-label" for="customFile">Stall Name Image</label>
+                        <input type="file" class="form-control" name="nameImage">
+                        <small  class="form-text text-muted">recomend scale = 1 x 6 </small>
+                    </div><br>
                     <center>
-                        <img src="<%=stall.QRcode%>" class="rounded mx-auto d-block" alt="Stall logo" width="80px" height="80px">
-                    </center>
-                </div>
-            </div><hr>
-            <label class="form-label" for="customFile">Stall Model</label>
-            <select class="form-select" aria-label="Default select example" name="model">
-                <option value=1 <% if(stall.model==1){ %> selected <% } %>  >One</option>
-                <option value=2 <% if(stall.model==2){ %> selected <% } %>>Two</option>
-                <% if(stall.package!=2){ %> 
-                    <option value=3<% if(stall.model==3){ %> selected <% } %>>Three</option>
-                <% } %> 
-            </select>
+                        <img src="<%=stall.nameImage%>" class="rounded mx-auto d-block" alt="Stall logo" width="300px" height="50px">
+                    </center>  
+                </div><hr>
+                
+                
+                <!-- QR image -->
+                <div class="row">
+                    <div class="col-md-8">
+                        <label class="form-label" for="customFile">QR Code Image</label>
+                        <input type="file" class="form-control" name="QRcode">
+                        <small  class="form-text text-muted">recomend scale = 1 x 1 </small>
+                    </div>
+                    <div class="col-md-4">
+                        <br>
+                        <center>
+                            <img src="<%=stall.QRcode%>" class="rounded mx-auto d-block" alt="Stall logo" width="80px" height="80px">
+                        </center>
+                    </div>
+                </div><hr>
+                <label class="form-label" for="customFile">Stall Model</label>
+                <select class="form-select" aria-label="Default select example" name="model">
+                    <option value=1 <% if(stall.model==1){ %> selected <% } %>  >One</option>
+                    <option value=2 <% if(stall.model==2){ %> selected <% } %>>Two</option>
+                    <% if(stall.package!=2){ %> 
+                        <option value=3<% if(stall.model==3){ %> selected <% } %>>Three</option>
+                    <% } %> 
+                </select>
+                <hr>
+                <label class="form-label" for="customFile">Stall Character</label>
+                <select class="form-select" aria-label="Default select example" name="characterType">
+                    <option value=0 <% if(stall.characterType==0){ %> selected <% } %> >Black Office Lady</option>
+                    <option value=1 <% if(stall.characterType==1){ %> selected <% } %> >White Office Lady</option>
+                    <option value=2 <% if(stall.characterType==2){ %> selected <% } %> >White Office Man</option>
+                    <option value=3 <% if(stall.characterType==3){ %> selected <% } %> >Casual Man 1</option>
+                    <option value=4 <% if(stall.characterType==4){ %> selected <% } %> >Casual Man 2</option>
+                    <option value=5 <% if(stall.characterType==5){ %> selected <% } %> >Casual Lady</option>
+                </select>     
+            </div>
+            <!-- right collum  ..................................................-->
+            <div class="col-md-4"><br>
+                <!-- poster 1 -->
+                <div class="row">
+                    <div class="col-md-8">
+                        <label class="form-label" for="customFile">Stall Poster 01</label>
+                        <input type="file" class="form-control" name="poster1">
+                        <small  class="form-text text-muted">recomend scale = 3 x 2 </small>
+                    </div>
+                    <div class="col-md-4">
+                        <br>
+                        <center>
+                            <img src="<%=stall.poster1%>" class="rounded mx-auto d-block" alt="Stall logo" width="120px" height="80px">
+                        </center>
+                    </div>
+                </div><hr>
+                <!-- poster 2 -->
+                <div class="row">
+                    <div class="col-md-8">
+                        <label class="form-label" for="customFile">Stall Poster 02</label>
+                        <small  class="form-text text-muted">for stall package 2 and 3 </small>
+                        <input type="file" class="form-control" name="poster2" <% if(stall.package<2){ %> disabled <% } %>>
+                        <small  class="form-text text-muted">recomend scale = 3 x 2 </small>
+                    </div>
+                    <div class="col-md-4">
+                        <br>
+                        <center>
+                            <img src="<%=stall.poster2%>" class="rounded mx-auto d-block" alt="Stall logo" width="120px" height="80px">
+                        </center>
+                    </div>
+                </div><hr>
+                <!-- poster 3 -->
+                <div class="row">
+                    <div class="col-md-8">
+                        <label class="form-label" for="customFile">Stall Poster 03</label>
+                        <small  class="form-text text-muted">for stall package 3 </small>
+                        <input type="file" class="form-control" name="poster3" <% if(stall.package<3){ %> disabled <% } %>>
+                        <small  class="form-text text-muted">recomend scale = 1 x 1 </small>
+                    </div>
+                    <div class="col-md-4">
+                        <br>
+                        <center>
+                            <img src="<%=stall.poster3%>" class="rounded mx-auto d-block" alt="Stall logo" width="120px" height="120px">
+                        </center>
+                    </div>
+                </div><hr>
+                <!-- poster 4 -->
+                <div class="row">
+                    <div class="col-md-8">
+                        <label class="form-label" for="customFile">Stall Poster 04</label>
+                        <small  class="form-text text-muted">for stall package 3 </small>
+                        <input type="file" class="form-control" name="poster4" <% if(stall.package<3){ %> disabled <% } %> >
+                        <small  class="form-text text-muted">recomend scale = 1 x 1 </small>
+                    </div>
+                    <div class="col-md-4">
+                        <br>
+                        <center>
+                            <img src="<%=stall.poster4%>" class="rounded mx-auto d-block" alt="Stall logo" width="120px" height="120px">
+                        </center>
+                    </div>
+                </div><hr>
+            </div>
             <hr>
-            <label class="form-label" for="customFile">Stall Character</label>
-            <select class="form-select" aria-label="Default select example" name="characterType">
-                <option value=0 <% if(stall.characterType==0){ %> selected <% } %> >Black Office Lady</option>
-                <option value=1 <% if(stall.characterType==1){ %> selected <% } %> >White Office Lady</option>
-                <option value=2 <% if(stall.characterType==2){ %> selected <% } %> >White Office Man</option>
-                <option value=3 <% if(stall.characterType==3){ %> selected <% } %> >Casual Man 1</option>
-                <option value=4 <% if(stall.characterType==4){ %> selected <% } %> >Casual Man 2</option>
-                <option value=5 <% if(stall.characterType==5){ %> selected <% } %> >Casual Lady</option>
-            </select>     
         </div>
-        <!-- right collum  ..................................................-->
-        <div class="col-md-4"><br>
-            <!-- poster 1 -->
-            <div class="row">
-                <div class="col-md-8">
-                    <label class="form-label" for="customFile">Stall Poster 01</label>
-                    <input type="file" class="form-control" name="poster1">
-                    <small  class="form-text text-muted">recomend scale = 3 x 2 </small>
-                </div>
-                <div class="col-md-4">
-                    <br>
-                    <center>
-                        <img src="<%=stall.poster1%>" class="rounded mx-auto d-block" alt="Stall logo" width="120px" height="80px">
-                    </center>
-                </div>
-            </div><hr>
-            <!-- poster 2 -->
-            <div class="row">
-                <div class="col-md-8">
-                    <label class="form-label" for="customFile">Stall Poster 02</label>
-                    <small  class="form-text text-muted">for stall package 2 and 3 </small>
-                    <input type="file" class="form-control" name="poster2" <% if(stall.package<2){ %> disabled <% } %>>
-                    <small  class="form-text text-muted">recomend scale = 3 x 2 </small>
-                </div>
-                <div class="col-md-4">
-                    <br>
-                    <center>
-                        <img src="<%=stall.poster2%>" class="rounded mx-auto d-block" alt="Stall logo" width="120px" height="80px">
-                    </center>
-                </div>
-            </div><hr>
-            <!-- poster 3 -->
-            <div class="row">
-                <div class="col-md-8">
-                    <label class="form-label" for="customFile">Stall Poster 03</label>
-                    <small  class="form-text text-muted">for stall package 3 </small>
-                    <input type="file" class="form-control" name="poster3" <% if(stall.package<3){ %> disabled <% } %>>
-                    <small  class="form-text text-muted">recomend scale = 1 x 1 </small>
-                </div>
-                <div class="col-md-4">
-                    <br>
-                    <center>
-                        <img src="<%=stall.poster3%>" class="rounded mx-auto d-block" alt="Stall logo" width="120px" height="120px">
-                    </center>
-                </div>
-            </div><hr>
-            <!-- poster 4 -->
-            <div class="row">
-                <div class="col-md-8">
-                    <label class="form-label" for="customFile">Stall Poster 04</label>
-                    <small  class="form-text text-muted">for stall package 3 </small>
-                    <input type="file" class="form-control" name="poster4" <% if(stall.package<3){ %> disabled <% } %> >
-                    <small  class="form-text text-muted">recomend scale = 1 x 1 </small>
-                </div>
-                <div class="col-md-4">
-                    <br>
-                    <center>
-                        <img src="<%=stall.poster4%>" class="rounded mx-auto d-block" alt="Stall logo" width="120px" height="120px">
-                    </center>
-                </div>
-            </div><hr>
-        </div>
-        <hr>
-    </div>
-    <button type="submit" class="btn btn-primary">Update Changes</button>
-  </form>
+        <button type="submit" class="btn btn-primary">Update Changes</button>
+      </form>
+</div>
+
+
+
 

@@ -11,11 +11,13 @@ router.get('/',adminAuth,async(req,res)=>{
     res.render('ownerDashboard/dashboard',{events:ob})
 })
 
+
 //event admins
 router.get('/eventadmins',adminAuth,async(req,res)=>{
     const admins = await eventAdmin.find()
     res.render('ownerDashboard/eventAdmins',{eventAdmins:admins})
 })
+
 
 //event requests
 router.get('/requests',adminAuth,async(req,res)=>{

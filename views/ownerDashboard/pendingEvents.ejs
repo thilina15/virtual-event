@@ -5,46 +5,47 @@
 <br>
 <hr>
 
+<div class="container">
+    <table class="table table-sm table-dark" style="text-align: center;">
+        <thead>
+          <tr>
+            <th scope="col">Admin Name</th>
+            <th scope="col">Event Name</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+            <% events.forEach(event=>{%>
+                <tr>
+                    <td>
+                        <%=event.eventAdmin.name%>
+                    </td>
+                    <td>
+                        <%=event.name%>
+                    </td>
+                    <td>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <form action="/event/approve/<%=event.id%>" method="GET">
+                                    <button type="submit" class="btn btn-success"> Active</button>
+                                </form>
+                            </div>
+                            <div class="col-md-4">
+                                <form action="/event/deny/<%=event.id%>" method="GET">
+                                    <button type="submit" class="btn btn-danger"> Delete</button>
+                                </form>
+                            </div>
+                            <div class="col-md-4">
+                                <form action="/event/visit/<%=event.id%>" method="GET">
+                                    <button type="submit" class="btn btn-info"> Visit</button>
+                                </form>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            <%}) %>   
+        </tbody>
+    </table>
+</div>
 
 
-
-<table class="table table-sm table-dark" style="text-align: center;">
-    <thead>
-      <tr>
-        <th scope="col">Admin Name</th>
-        <th scope="col">Event Name</th>
-        <th scope="col">Action</th>
-      </tr>
-    </thead>
-    <tbody>
-        <% events.forEach(event=>{%>
-            <tr>
-                <td>
-                    <%=event.eventAdmin.name%>
-                </td>
-                <td>
-                    <%=event.name%>
-                </td>
-                <td>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <form action="/event/approve/<%=event.id%>" method="GET">
-                                <button type="submit" class="btn btn-success"> Active</button>
-                            </form>
-                        </div>
-                        <div class="col-md-4">
-                            <form action="/event/deny/<%=event.id%>" method="GET">
-                                <button type="submit" class="btn btn-danger"> Delete</button>
-                            </form>
-                        </div>
-                        <div class="col-md-4">
-                            <form action="/event/visit/<%=event.id%>" method="GET">
-                                <button type="submit" class="btn btn-info"> Visit</button>
-                            </form>
-                        </div>
-                    </div>
-                </td>
-            </tr>
-        <%}) %>   
-    </tbody>
-  </table>

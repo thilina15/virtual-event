@@ -17,7 +17,7 @@ style="
   background-repeat: no-repeat;
   background-attachment: fixed;">
     
-<br><br><center><h1>VIRTUAL EVENT</h1></center>
+<!-- <br><br><center><h1>VIRTUAL EVENT</h1></center> -->
 
 <!-- nav bars -->
 <% if(locals.userType){ %> 
@@ -33,7 +33,7 @@ style="
     <%- include('../navBars/baseNav') %>
 <% } %>    
  
-    <div class="container">
+    <div class="container" >
         <% if(locals.success) {%>
             <div class="alert alert-success"  role="alert">
                 <%=locals.success%> 
@@ -43,14 +43,17 @@ style="
             <div class="alert alert-danger"  role="alert">
                 <%=locals.error%> 
               </div>
-        <% } %>   
+        <% } %>      
+    </div>
 
+    <div  style="min-height: 700px;">
         <%- body %>
     </div>
+    
     <br>
     <!-- Footer -->
     
-    <footer class=" text-center text-white" style="background-color:#1c1c1c; position: relative;">
+    <footer class=" text-center text-white" style="background-color:#1c1c1c; position: relative; ">
         <!-- Grid container -->
         <div class="container p-4">
     
@@ -80,10 +83,9 @@ style="
         <!-- Section: Text -->
         <section class="mb-4">
             <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt
-            distinctio earum repellat quaerat voluptatibus placeat nam,
-            commodi optio pariatur est quia magnam eum harum corrupti dicta,
-            aliquam sequi voluptate quas.
+            Looking for a way to conduct an Exhibition?, an Event?. Is Covid the problem?. 
+            Host your exhibition on "Virtual Event platform". All the functionalities are fully customizable.
+            Event management, Stall management, Advertising spaces, and more.. Sign up and explore the platform.. 
             </p>
         </section>
         <!-- Section: Text -->
@@ -92,12 +94,7 @@ style="
         </div>
         <!-- Grid container -->
     
-        <!-- Copyright -->
-        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
-        © 2020 Copyright:
-        <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
-        </div>
-        <!-- Copyright -->
+        
     
     </footer>
   <!-- Footer -->

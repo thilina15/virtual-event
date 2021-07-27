@@ -1,3 +1,10 @@
-here is the login details <br>
-userName: <input type="text" readonly value="<%-userName%>">
-password: <input type="text" readonly value="<%-password%>">
+<center><h4>here is the login details</h4></center>
+ <br>
+<div class="container">
+    <form action="/exhibitor/sendMail/<%=locals.event._id%>" method="POST">
+        userName: <input type="text" class="form-control" readonly value="<%-userName%>" name="userName">
+        password: <input type="text" class="form-control" readonly value="<%-password%>" name="password">
+        <input type="text" name="email" value="<%=email%>" hidden>
+        <button type="submit" class="btn btn-success">Send Credentials to Email</button>
+    </form>
+</div>
