@@ -6,15 +6,11 @@ const eventAdminAuth = require('../auth/userAuth').eventAdmin
 const exhibitorAuth = require('../auth/userAuth').exhibitor
 const stall = require('../models/stall')
 const content = require('../models/content')
+const {s3,bucketName} = require('../aws')
 
 //file upload setup
 const multer = require('multer')
-const storage = multer.diskStorage({
-    destination:'public/uploads/',
-    filename:(req,file,cb)=>{
-        cb(null, Date.now()+file.originalname)
-    }
-})
+const storage = multer.memoryStorage()
 const upload = multer({storage:storage})
 
 
@@ -41,15 +37,29 @@ router.get('/:contentID',exhibitorAuth,async(req,res)=>{
 router.post('/:contentID',upload.single('image'),async(req,res)=>{
     var ob = await content.findById(req.params.contentID)
 
-    if(req.file){
-        ob.image ='/' + req.file.destination + req.file.filename
-    }
     ob.tittle = req.body.tittle
     ob.description = req.body.description
 
-    await ob.save()
-    var message = 'content updated successfully..!'
-    res.redirect('/content/all/'+ob.stallID+'/?success='+message)
+    if(req.file){
+        const params = {
+            Bucket: bucketName,
+            Key: Date.now() + req.file.originalname, 
+            Body: req.file.buffer
+        }
+        s3.upload(params, async function(err, data) {
+            if (err) {
+                throw err;
+            }
+            ob.image = data.Location
+            await ob.save() //save with image
+            var message = 'content updated successfully..!'
+            res.redirect('/content/all/'+ob.stallID+'/?success='+message)  
+        })
+    }else{
+        await ob.save()
+        var message = 'content updated successfully..!'
+        res.redirect('/content/all/'+ob.stallID+'/?success='+message)
+    }
 })
 
 //add new content view
@@ -67,17 +77,30 @@ router.get('/new/:stallID',exhibitorAuth,async(req,res)=>{
 router.post('/new/:stallID',upload.single('image'),async(req,res)=>{   
     var stallOB = await stall.findById(req.params.stallID)
     var ob = new content()
-    if(req.file){
-        ob.image ='/' + req.file.destination + req.file.filename
-    }
     ob.tittle = req.body.tittle
     ob.description = req.body.description
     ob.stallID = stallOB
-
-    await ob.save()
-
-    var message = 'content added successfully..!'
-    res.redirect('/content/all/'+req.params.stallID+'/?success='+message)
+    if(req.file){
+        const params = {
+            Bucket: bucketName,
+            Key: Date.now() + req.file.originalname, 
+            Body: req.file.buffer
+        }
+        s3.upload(params, async function(err, data) {
+            if (err) {
+                throw err;
+            }
+            ob.image = data.Location
+            await ob.save() //save with image 
+            var message = 'content added successfully..!'
+            res.redirect('/content/all/'+req.params.stallID+'/?success='+message)
+        })
+    }else{
+        await ob.save()
+        var message = 'content added successfully..!'
+        res.redirect('/content/all/'+req.params.stallID+'/?success='+message)
+    }
+    
 })
 
 //remove content

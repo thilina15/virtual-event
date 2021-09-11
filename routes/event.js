@@ -1,7 +1,5 @@
-if (process.env.NODE_ENV !== 'production'){
-    require('dotenv').config({path:'../.env'})   
-}
 
+const {s3,bucketName} = require('../aws')
 const express = require('express')
 const { find, findById } = require('../models/event')
 const router = express.Router()
@@ -13,14 +11,13 @@ const stall = require('../models/stall')
 const advertise = require('../models/advertise')
 const exhibitor = require('../models/exhibitor')
 
+
+
+
+
 //image upload system
 const multer = require('multer')
-const storage = multer.diskStorage({
-    destination:'public/uploads/',
-    filename:(req,file,cb)=>{
-        cb(null,Date.now()+file.originalname)
-    }
-})
+const storage = multer.memoryStorage()
 const upload = multer({storage:storage})
 
 
@@ -135,10 +132,21 @@ router.post('/settings/:eventID',eventAdminAuth,upload.single('image'),async(req
             ob.stallPackage02 = req.body.p2
             ob.stallPackage03 = req.body.p3
             if(req.file){
-                console.log('file is here')
-                    ob.notice =  '/' + req.file.destination + req.file.filename
-                    await ob.save()//save with image  
-                    res.redirect('/event/'+req.params.eventID)
+                const params = {
+                    Bucket: bucketName,
+                    Key: Date.now() + req.file.originalname, 
+                    Body: req.file.buffer
+                }
+                s3.upload(params, async function(err, data) {
+                    if (err) {
+                        throw err;
+                    }
+                    console.log(`File uploaded successfully. ${data.Location}`);
+                    ob.notice = data.Location
+                    await ob.save() //save with image
+                    console.log('save done');
+                    res.redirect('/event/'+req.params.eventID)   
+                })
             }else{
                 await ob.save() //saving without image
                 res.redirect('/event/'+req.params.eventID)

@@ -2,21 +2,20 @@
 const express = require('express')
 const router = express.Router()
 
+
 const eventAdminAuth = require('../auth/userAuth').eventAdmin
 const exhibitorAuth = require('../auth/userAuth').exhibitor
 const event = require('../models/event')
 const exhibitor = require('../models/exhibitor')
 const stall = require('../models/stall')
 const content = require('../models/content')
+const {fileUpload} = require('../aws')
+
+
 
 //file upload setup
 const multer = require('multer')
-const storage = multer.diskStorage({
-    destination:'public/uploads/',
-    filename:(req,file,cb)=>{
-        cb(null, Date.now()+file.originalname)
-    }
-})
+const storage = multer.memoryStorage()
 const upload = multer({storage:storage})
 
 
@@ -132,6 +131,10 @@ router.get('/:stallID',exhibitorAuth,async(req,res)=>{
     }
 })
 
+
+
+
+
 //stall settings update
 router.post('/:stallID',exhibitorAuth,upload.fields([
     {name:'logoImage',maxCount:1},
@@ -144,33 +147,40 @@ router.post('/:stallID',exhibitorAuth,upload.fields([
 ]),async(req,res)=>{
     var stallOB = await stall.findById(req.params.stallID)
 
-    if(req.files.logoImage){
-        var image = req.files.logoImage[0]
-        stallOB.logoImage = '/'+image.destination + image.filename 
+    try{
+        stallOB.logoImage =  await fileUpload(req.files.logoImage)
+    }catch(e){
+
     }
-    if(req.files.nameImage){
-        var image = req.files.nameImage[0]
-        stallOB.nameImage = '/'+image.destination + image.filename 
+    try{
+        stallOB.nameImage =  await fileUpload(req.files.nameImage)
+    }catch(e){
+
     }
-    if(req.files.QRcode){
-        var image = req.files.QRcode[0]
-        stallOB.QRcode = '/'+image.destination + image.filename 
+    try{
+        stallOB.QRcode =  await fileUpload(req.files.QRcode)
+    }catch(e){
+
     }
-    if(req.files.poster1){
-        var image = req.files.poster1[0]
-        stallOB.poster1 = '/'+image.destination + image.filename 
+    try{
+        stallOB.poster1 =  await fileUpload(req.files.poster1)
+    }catch(e){
+
     }
-    if(req.files.poster2){
-        var image = req.files.poster2[0]
-        stallOB.poster2 = '/'+image.destination + image.filename 
+    try{
+        stallOB.poster2 =  await fileUpload(req.files.poster2)
+    }catch(e){
+
     }
-    if(req.files.poster3){
-        var image = req.files.poster3[0]
-        stallOB.poster3 = '/'+image.destination + image.filename 
+    try{
+        stallOB.poster3 =  await fileUpload(req.files.poster3)
+    }catch(e){
+
     }
-    if(req.files.poster4){
-        var image = req.files.poster4[0]
-        stallOB.poster4 = '/'+image.destination + image.filename 
+    try{
+        stallOB.poster4 =  await fileUpload(req.files.poster4)
+    }catch(e){
+
     }
 
     stallOB.name = req.body.name

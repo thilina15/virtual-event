@@ -8,15 +8,11 @@ const event = require('../models/event')
 const exhibitor = require('../models/exhibitor')
 const stall = require('../models/stall')
 const advertise = require('../models/advertise')
+const {s3,bucketName} = require('../aws')
 
 //file upload setup
 const multer = require('multer')
-const storage = multer.diskStorage({
-    destination:'public/uploads/',
-    filename:(req,file,cb)=>{
-        cb(null, Date.now()+file.originalname)
-    }
-})
+const storage = multer.memoryStorage()
 const upload = multer({storage:storage})
 
 //add new advertise
@@ -96,22 +92,35 @@ router.get('/:ID',exhibitorAuth,async(req,res)=>{
 //update ad
 router.post('/:ID',upload.single('image'),async(req,res)=>{
     var ob = await advertise.findById(req.params.ID)
-    if(req.file){
-        ob.image = '/' + req.file.destination + req.file.filename
-    }
     ob.headline = req.body.headline
     ob.description = req.body.description
-
+    
     try{
-        await ob.save()
-        const message= 'advertising space updated successfully..!'
-        res.redirect('/advertise/'+req.params.ID+'/?success='+message)
-    }catch(er){
+        if(req.file){
+            const params = {
+                Bucket: bucketName,
+                Key: Date.now() + req.file.originalname, 
+                Body: req.file.buffer
+            }
+            s3.upload(params, async function(err, data) {
+                if (err) {
+                    throw err;
+                }
+                ob.image = data.Location
+                await ob.save() //save with image 
+                const message= 'advertising space updated successfully..!'
+                res.redirect('/advertise/'+req.params.ID+'/?success='+message)
+            })
+        }else{
+            await ob.save()
+            const message= 'advertising space updated successfully..!'
+            res.redirect('/advertise/'+req.params.ID+'/?success='+message)
+        }
+        
+    }catch(e){
         const message= 'something went wrong.. check your connection'
         res.redirect('/advertise/'+req.params.ID+'/?error='+message)
-    }
-    
-    
+    }    
 })
 
 module.exports = router
