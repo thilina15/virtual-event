@@ -51,6 +51,27 @@ router.get('/deny/:id',adminAuth,async(req,res)=>{
     
 })
 
+//remove event from owner
+router.get('/remove/:id',adminAuth,async(req,res)=>{
+    try{
+        //remove ads
+        await advertise.deleteMany({eventID:req.params.id})
+        //remove stalls
+        await stall.deleteMany({eventID:req.params.id})
+        //remove exhibitors
+        await exhibitor.deleteMany({eventID:req.params.id})
+        //remove event
+        await event.findByIdAndRemove(req.params.id)
+        var message = 'event deleted successfully..'
+        res.redirect('/dashboard/?success='+message)
+    }catch(e){
+        var message = 'something went wrong. Try again..'
+        res.redirect('/dashboard/?error='+message)
+    }
+    
+    
+})
+
 //visti event
 router.get('/visit/:id',adminAuth,async(req,res)=>{
     try{

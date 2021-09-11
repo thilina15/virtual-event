@@ -37,9 +37,18 @@ const stall = new mongoose.Schema({
         type:String,
         default:'/public/images/Poster.jpg'
     },
-    poster2:String,
-    poster3:String,
-    poster4:String,
+    poster2:{
+        type:String,
+        default:'/public/images/Poster.jpg'
+    },
+    poster3:{
+        type:String,
+        default:'/public/images/Poster.jpg'
+    },
+    poster4:{
+        type:String,
+        default:'/public/images/Poster.jpg'
+    },
     QRcode:String,
     streamLink:String,
     totalVisits:Number,

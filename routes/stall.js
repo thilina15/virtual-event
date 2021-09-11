@@ -22,6 +22,7 @@ const upload = multer({storage:storage})
 
 //add stall package 1
 router.post('/package1/:ID',async(req,res)=>{
+    var ex = await exhibitor.findById(req.params.ID)
     if(ex){
         var st = new stall({
             package:1,

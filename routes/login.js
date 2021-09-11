@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const eventAdmin = require('../models/eventAdmin')
 const exhibitor = require('../models/exhibitor')
+const owner = require('../models/owner')
 
 //event admins and exhibitors login
 router.get('/',(req,res)=>{
@@ -42,13 +43,28 @@ router.get('/admin',(req,res)=>{
     res.render('login/login',{admin:true})
 })
 
-router.post('/admin',(req,res)=>{
-    req.session.userObject = null
-    req.session.userType = 'systemAdmin'
-    var message = "User Login as System Owner Successfully..!"
-    res.redirect('/dashboard/?success='+message) 
+router.post('/admin',async(req,res)=>{
+    var ob = await owner.findOne({userName:req.body.userName, password:req.body.password})
+    if(ob){
+        req.session.userObject = null
+        req.session.userType = 'systemAdmin'
+        var message = "User Login as System Owner Successfully..!"
+        res.redirect('/dashboard/?success='+message) 
+    }else{
+        var message = "Wrong details .. Try again.."
+        res.redirect('/login/admin/?error='+message) 
+    }
+    
 })
 
+// router.get('/abc',async(req,res)=>{
+//     var ob = new owner({
+//         userName:'admin',
+//         password:'admin'
+//     })
+//     await ob.save()
+//     res.send(ob)
+// })
 
 //make your own event login
 router.get('/forevent',(req,res)=>{
